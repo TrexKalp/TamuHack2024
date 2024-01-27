@@ -10,7 +10,12 @@ import {
   Image,
 } from "@chakra-ui/react";
 
-const HomePage = ({ onStartQuiz }: { onStartQuiz: () => void }) => {
+interface HomePageProps {
+  onQuizClick: () => void;
+  onDiagramClick: () => void;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ onQuizClick, onDiagramClick }) => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
   const cardBgColor = useColorModeValue("white", "gray.800");
 
@@ -51,7 +56,7 @@ const HomePage = ({ onStartQuiz }: { onStartQuiz: () => void }) => {
           <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
             <Heading size="md">Quiz</Heading>
             <Text mt={2}>Test your knowledge</Text>
-            <Button mt={4} colorScheme="blue" onClick={onStartQuiz}>
+            <Button mt={4} colorScheme="blue" onClick={onQuizClick}>
               Start Quiz
             </Button>
           </Box>
@@ -60,7 +65,7 @@ const HomePage = ({ onStartQuiz }: { onStartQuiz: () => void }) => {
           <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
             <Heading size="md">Your Aircraft</Heading>
             <Text mt={2}>Learn about your plane</Text>
-            <Button mt={4} colorScheme="blue" onClick={onStartQuiz}>
+            <Button mt={4} colorScheme="blue" onClick={onDiagramClick}>
               Learn
             </Button>
           </Box>

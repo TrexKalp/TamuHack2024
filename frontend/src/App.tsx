@@ -15,11 +15,12 @@ function App() {
 
   // Handlers for each step of the flow
   const handleSplashLoaded = () => setCurrentStep("landingPage"); // Changed to "landingPage" to match your naming
-  const handleStartQuiz = () => setCurrentStep("login");
+  const handleStartCompanion = () => setCurrentStep("login");
   const handleLoginSuccess = () => setCurrentStep("enterFlightNumber");
   const handleFlightNumberEntered = () => setCurrentStep("confirmation");
   const handleConfirmed = () => setCurrentStep("homePage"); // Transition to HomePage after confirmation
-  const handleStartDiagram = () => setCurrentStep("diagramLandingPage");
+  const handleQuizStart = () => setCurrentStep("quizLandingPage");
+  const handleDiagramStart = () => setCurrentStep("diagramLandingPage");
 
 
   return (
@@ -28,23 +29,23 @@ function App() {
         <SplashScreen onLoaded={handleSplashLoaded} />
       )}
       {currentStep === "landingPage" && ( // Changed to "landingPage" to match your naming
-        <LandingPage onStartQuiz={handleStartQuiz} />
+        <LandingPage onGoToHome={handleStartCompanion} />
       )}
       {currentStep === "login" && <LoginScreen onLogin={handleLoginSuccess} />}
       {currentStep === "enterFlightNumber" && (
         <FlightNumberEntry onFlightNumberEntered={handleFlightNumberEntered} />
       )}
-      {currentStep === "quizLandingPage" && (
-          <QuizPage />
-      )}
-      {currentStep === "diagramLandingPage" && (
-          <AircraftDiagram />
-      )}
       {currentStep === "confirmation" && (
         <ConfirmationScreen onConfirmed={handleConfirmed} />
       )}
       {currentStep === "homePage" && ( // Render the HomePage component after confirmation
-        <HomePage onStartQuiz={handleStartQuiz} /> // Assuming you want to provide an option to start the quiz from the HomePage
+        <HomePage onQuizClick={handleQuizStart}  onDiagramClick={handleDiagramStart}/> // Assuming you want to provide an option to start the quiz from the HomePage
+      )}
+      {currentStep === "quizLandingPage" && (
+        <QuizPage />
+      )}
+      {currentStep === "diagramLandingPage" && (
+        <AircraftDiagram />
       )}
     </>
   );
