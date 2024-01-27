@@ -19,6 +19,8 @@ function App() {
   const handleLoginSuccess = () => setCurrentStep("enterFlightNumber");
   const handleFlightNumberEntered = () => setCurrentStep("confirmation");
   const handleConfirmed = () => setCurrentStep("homePage"); // Transition to HomePage after confirmation
+  const handleStartDiagram = () => setCurrentStep("diagramLandingPage");
+
 
   return (
     <>
@@ -34,6 +36,9 @@ function App() {
       )}
       {currentStep === "quizLandingPage" && (
           <QuizPage />
+      )}
+      {currentStep === "diagramLandingPage" && (
+          <AircraftDiagram />
       )}
       {currentStep === "confirmation" && (
         <ConfirmationScreen onConfirmed={handleConfirmed} />

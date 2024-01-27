@@ -9,7 +9,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 
-const LandingPage = ({ onStartQuiz }) => {
+const LandingPage = () => {
   const bgColor = useColorModeValue("gray.100", "gray.700"); // Responsive background color for light/dark mode
   const textColor = useColorModeValue("gray.800", "gray.100"); // Responsive text color for light/dark mode
 
