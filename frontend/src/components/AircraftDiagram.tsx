@@ -57,7 +57,7 @@ const AircraftDiagram = () => {
               backgroundColor: "rgba(106, 106, 107, 0.3)", // Red highlight (adjust color as needed)
               pointerEvents: "none", // To allow clicking through the overlay
               borderRadius: "30%", // To make the highlight circular
-            }} 
+            }}
             onClick={() => handleClick("area1")}
           ></div>
 
@@ -72,7 +72,7 @@ const AircraftDiagram = () => {
               backgroundColor: "rgba(106, 106, 107, 0.3)", // Blue highlight (adjust color as needed)
               pointerEvents: "none",
               borderRadius: "30%", // To make the highlight circular
-            }} 
+            }}
             onClick={() => handleClick("area2")}
           ></div>
 

@@ -6,23 +6,26 @@ import AircraftDiagram from "./components/AircraftDiagram";
 import QuizPage from "./components/QuizPage.tsx";
 import TopNav from "./components/TopNav";
 // Import other pages/components you might have
+import { Box } from "@chakra-ui/react";
 
 function App() {
   return (
     <Router>
-      <TopNav style={{ position: "fixed", top: 0, width: "100%" }} />
-      <div style={{ paddingBottom: "50px" }}>
-        {" "}
-        {/* Add padding to account for the BottomTabNav height */}
+      <Box position="fixed" top={0} w="100%" zIndex={1}>
+        <TopNav />
+      </Box>
+      <Box pt="75px" pb="75px">
+        {/* Add padding to account for the TopNav and BottomTabNav height */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/quiz" element={<QuizPage />} />
           <Route path="/diagram" element={<AircraftDiagram />} />
           {/* Define other routes as needed */}
         </Routes>
-      </div>
-      <BottomTabNav style={{ position: "fixed", bottom: 0, width: "100%" }} />{" "}
-      {/* Ensure BottomTabNav is always at the bottom */}
+      </Box>
+      <Box position="fixed" bottom={0} w="100%" zIndex={1}>
+        <BottomTabNav />
+      </Box>
     </Router>
   );
 }
