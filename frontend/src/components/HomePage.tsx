@@ -17,18 +17,15 @@ const HomePage = ({ onStartQuiz }: { onStartQuiz: () => void }) => {
   return (
     <Box bg={bgColor} minH="100vh" py={5}>
       <VStack spacing={4}>
-        <Heading>Flight Quiz App</Heading>
+        <Heading>American Companion</Heading>
 
         <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2}>
-          <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
-            <Heading size="md">Leaderboard</Heading>
-            <Text mt={2}>Top scores of the week</Text>
-            <Text>tesing this out </Text>
-            <Image
-              src="https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg"
-              alt="Flight Quiz Logo"
-            />
-          </Box>
+          <Image
+            src="https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg"
+            alt="Flight Quiz Logo"
+            style={{ width: "100%", height: "100%", borderRadius: "5%" }}
+          />
+
           {/* Leaderboard Section */}
           <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
             <Heading size="md">Leaderboard</Heading>
