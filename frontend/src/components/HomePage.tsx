@@ -22,7 +22,7 @@ const HomePage = ({ onStartQuiz }) => {
       justifyContent="center"
     >
       <VStack spacing={8} p={5} align="center">
-        <Heading color={textColor}>Welcome to the Flight Quiz!</Heading>
+        <Heading color={textColor}>Welcome To The Flight Companion!</Heading>
         <Text fontSize="lg" color={textColor}>
           Test your aviation knowledge and learn interesting facts about the
           world of flight.
