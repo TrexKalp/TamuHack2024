@@ -8,7 +8,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-const FlightNumberEntry = ({ onFlightNumberEntered }) => {
+const FlightNumberEntry = ({
+  onFlightNumberEntered,
+}: {
+  onFlightNumberEntered: (flightNumber: string) => void;
+}) => {
   const [flightNumber, setFlightNumber] = useState("");
 
   const handleSubmit = () => {

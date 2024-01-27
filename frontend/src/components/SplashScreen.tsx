@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box, Image, Text, VStack, Spinner } from "@chakra-ui/react";
 import logolong from "../assets/logolong.png";
 
-const SplashScreen = ({ onLoaded }) => {
+const SplashScreen = ({ onLoaded }: { onLoaded: () => void }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

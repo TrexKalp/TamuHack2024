@@ -8,7 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-const LoginScreen = ({ onLogin }) => {
+const LoginScreen = ({ onLogin }: { onLogin: () => void }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
