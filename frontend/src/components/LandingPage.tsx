@@ -8,7 +8,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-const LandingPage = ({ onStartQuiz }: { onStartQuiz: () => void }) => {
+const LandingPage = ({ onGoToHome }: { onGoToHome: () => void }) => {
   const bgColor = useColorModeValue("gray.100", "gray.700"); // Responsive background color for light/dark mode
   const textColor = useColorModeValue("gray.800", "gray.100"); // Responsive text color for light/dark mode
 
@@ -27,8 +27,8 @@ const LandingPage = ({ onStartQuiz }: { onStartQuiz: () => void }) => {
           Test your aviation knowledge and learn interesting facts about the
           world of flight.
         </Text>
-        <Button colorScheme="blue" size="lg" onClick={onStartQuiz}>
-          Start Quiz
+        <Button colorScheme="blue" size="lg" onClick={onGoToHome}>
+          Start Companion
         </Button>
       </VStack>
     </Box>
