@@ -7,6 +7,7 @@ import FlightNumberEntry from "./components/FlightNumberEntry";
 import ConfirmationScreen from "./components/ConfirmationScreen";
 import HomePage from "./components/HomePage"; // Make sure to import the HomePage component
 import AircraftDiagram from "./components/AircraftDiagram";
+import QuizPage from "./components/QuizPage.tsx";
 
 function App() {
   // State to manage the current step of the app
@@ -14,7 +15,7 @@ function App() {
 
   // Handlers for each step of the flow
   const handleSplashLoaded = () => setCurrentStep("landingPage"); // Changed to "landingPage" to match your naming
-  const handleStartQuiz = () => setCurrentStep("login");
+  const handleStartQuiz = () => setCurrentStep("quizLandingPage");
   const handleLoginSuccess = () => setCurrentStep("enterFlightNumber");
   const handleFlightNumberEntered = () => setCurrentStep("confirmation");
   const handleConfirmed = () => setCurrentStep("homePage"); // Transition to HomePage after confirmation
@@ -30,6 +31,9 @@ function App() {
       {currentStep === "login" && <LoginScreen onLogin={handleLoginSuccess} />}
       {currentStep === "enterFlightNumber" && (
         <FlightNumberEntry onFlightNumberEntered={handleFlightNumberEntered} />
+      )}
+      {currentStep === "quizLandingPage" && (
+          <QuizPage />
       )}
       {currentStep === "confirmation" && (
         <ConfirmationScreen onConfirmed={handleConfirmed} />
