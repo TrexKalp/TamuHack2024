@@ -78,9 +78,11 @@ const HomePage: React.FC = () => {
               <Heading size="md">Quiz</Heading>
               <Text mt={2}>Test your knowledge</Text>
 
-              <Button mt={4} colorScheme="blue">
-                Start Quiz
-              </Button>
+              <Link to="/quiz">
+                <Button mt={4} colorScheme="blue">
+                  Start Quiz
+                </Button>
+              </Link>
             </Box>
 
             {/* Diagram Section */}
