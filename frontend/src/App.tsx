@@ -6,6 +6,7 @@ import LoginScreen from "./components/LoginScreen";
 import FlightNumberEntry from "./components/FlightNumberEntry";
 import ConfirmationScreen from "./components/ConfirmationScreen";
 import HomePage from "./components/HomePage"; // Make sure to import the HomePage component
+import AircraftDiagram from "./components/AircraftDiagram";
 
 function App() {
   // State to manage the current step of the app

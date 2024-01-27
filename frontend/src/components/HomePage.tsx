@@ -48,6 +48,15 @@ const HomePage = ({ onStartQuiz }) => {
               Start Quiz
             </Button>
           </Box>
+
+          {/* Diagram Section */}
+          <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
+            <Heading size="md">Your Aircraft</Heading>
+            <Text mt={2}>Learn about your plane</Text>
+            <Button mt={4} colorScheme="blue" onClick={onStartQuiz}>
+              Learn
+            </Button>
+          </Box>
         </SimpleGrid>
       </VStack>
     </Box>
