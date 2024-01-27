@@ -15,7 +15,7 @@ function App() {
 
   // Handlers for each step of the flow
   const handleSplashLoaded = () => setCurrentStep("landingPage"); // Changed to "landingPage" to match your naming
-  const handleStartQuiz = () => setCurrentStep("quizLandingPage");
+  const handleStartQuiz = () => setCurrentStep("login");
   const handleLoginSuccess = () => setCurrentStep("enterFlightNumber");
   const handleFlightNumberEntered = () => setCurrentStep("confirmation");
   const handleConfirmed = () => setCurrentStep("homePage"); // Transition to HomePage after confirmation
