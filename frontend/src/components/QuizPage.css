@@ -26,3 +26,12 @@
 .answer.selected {
     border-color: green;
 }
+
+.answer.submitted:hover {
+    border-color: inherit; /* Prevents change on hover */
+}
+
+/* You may want to style .submitted differently to indicate it's locked */
+.answer.submitted {
+    cursor: default; /* Changes the cursor to indicate no action on hover */
+}

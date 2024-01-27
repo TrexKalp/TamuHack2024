@@ -54,7 +54,7 @@ const QuizPage: React.FC = () => {
           {questions[currentQuestionIndex].answers.map((answer: IAnswer) => (
               <div
                   key={answer.id}
-                  className={`answer ${selectedAnswer === answer.id ? 'selected' : ''}`}
+                  className={`answer ${selectedAnswer === answer.id ? 'selected' : ''} ${isAnswerSubmitted ? 'submitted' : ''}`}
                   onClick={() => handleAnswerSelect(answer.id)}
               >
                 {answer.text}
