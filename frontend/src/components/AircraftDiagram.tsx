@@ -28,8 +28,8 @@ const LandingPage = ({ onStartQuiz }) => {
           Discover everything about the plane you're flying in from history
           to how it was made.
         </Text>
-        <Image>
-            
+        <Image src="frontend\src\components\AircraftDiagram.tsx">
+
         </Image>
       </VStack>
     </Box>
