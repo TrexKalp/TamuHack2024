@@ -7,9 +7,10 @@ import {
   SimpleGrid,
   Text,
   useColorModeValue,
+  Image,
 } from "@chakra-ui/react";
 
-const HomePage = ({ onStartQuiz }) => {
+const HomePage = ({ onStartQuiz }: { onStartQuiz: () => void }) => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
   const cardBgColor = useColorModeValue("white", "gray.800");
 
@@ -19,6 +20,15 @@ const HomePage = ({ onStartQuiz }) => {
         <Heading>Flight Quiz App</Heading>
 
         <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2}>
+          <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
+            <Heading size="md">Leaderboard</Heading>
+            <Text mt={2}>Top scores of the week</Text>
+            <Text>tesing this out </Text>
+            <Image
+              src="https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg"
+              alt="Flight Quiz Logo"
+            />
+          </Box>
           {/* Leaderboard Section */}
           <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
             <Heading size="md">Leaderboard</Heading>
