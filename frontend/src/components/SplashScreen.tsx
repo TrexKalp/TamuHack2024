@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Image, Text, VStack, Spinner } from "@chakra-ui/react";
+import logolong from "../assets/logolong.png";
 
 const SplashScreen = ({ onLoaded }) => {
   const [loading, setLoading] = useState(true);
@@ -28,7 +29,7 @@ const SplashScreen = ({ onLoaded }) => {
     >
       <VStack spacing={{ base: 3, md: 4 }} paddingX={{ base: 4, md: 8 }}>
         <Image
-          src="/path/to/your/logo.png"
+          src={logolong}
           boxSize={{ base: "80px", md: "100px", lg: "120px" }}
           alt="Flight Quiz Logo"
         />
