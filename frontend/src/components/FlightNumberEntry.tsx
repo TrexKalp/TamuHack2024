@@ -8,18 +8,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-const FlightNumberEntry = ({
-  onFlightNumberEntered,
-}: {
-  onFlightNumberEntered: (flightNumber: string) => void;
-}) => {
+const FlightNumberEntry = () => {
   const [flightNumber, setFlightNumber] = useState("");
-
-  const handleSubmit = () => {
-    // Implement submission logic here
-    // For demonstration, we'll call onFlightNumberEntered when the button is clicked
-    onFlightNumberEntered(flightNumber);
-  };
 
   return (
     <Box display="flex" alignItems="center" justifyContent="center" h="100vh">
@@ -32,9 +22,7 @@ const FlightNumberEntry = ({
             onChange={(e) => setFlightNumber(e.target.value)}
           />
         </FormControl>
-        <Button colorScheme="blue" onClick={handleSubmit}>
-          Submit
-        </Button>
+        <Button colorScheme="blue">Submit</Button>
       </VStack>
     </Box>
   );

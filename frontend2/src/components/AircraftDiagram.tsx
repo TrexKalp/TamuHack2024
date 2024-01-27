@@ -6,9 +6,10 @@ import {
   Text,
   VStack,
   useColorModeValue,
+  Image,
 } from "@chakra-ui/react";
 
-const LandingPage = () => {
+const AircraftDiagram = () => {
   const bgColor = useColorModeValue("gray.100", "gray.700"); // Responsive background color for light/dark mode
   const textColor = useColorModeValue("gray.800", "gray.100"); // Responsive text color for light/dark mode
 
@@ -22,17 +23,15 @@ const LandingPage = () => {
       justifyContent="center"
     >
       <VStack spacing={8} p={5} align="center">
-        <Heading color={textColor}>Welcome To The Flight Companion!</Heading>
+        <Heading color={textColor}>All About Your Plane!</Heading>
         <Text fontSize="lg" color={textColor}>
-          Test your aviation knowledge and learn interesting facts about the
-          world of flight.
+          Discover everything about the plane you're flying in from history to
+          how it was made.
         </Text>
-        <Button colorScheme="blue" size="lg">
-          Start Companion
-        </Button>
+        <Image src="frontend\src\components\AircraftDiagram.tsx"></Image>
       </VStack>
     </Box>
   );
 };
 
-export default LandingPage;
+export default AircraftDiagram;

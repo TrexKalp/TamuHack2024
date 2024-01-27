@@ -15,18 +15,14 @@ import {
   Tabs,
   Flex,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-interface HomePageProps {
-  onQuizClick: () => void;
-  onDiagramClick: () => void;
-}
-
-const HomePage: React.FC<HomePageProps> = ({ onQuizClick, onDiagramClick }) => {
+const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
   const cardBgColor = useColorModeValue("white", "gray.800");
 
   return (
-    <Flex direction="column" h="100vh">
+    <Flex direction="column" h="100vh" mb="100px">
       <Box bg={bgColor} minH="100vh" py={5}>
         <VStack spacing={4}>
           <Heading>American Companion</Heading>
@@ -63,7 +59,8 @@ const HomePage: React.FC<HomePageProps> = ({ onQuizClick, onDiagramClick }) => {
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Heading size="md">Quiz</Heading>
               <Text mt={2}>Test your knowledge</Text>
-              <Button mt={4} colorScheme="blue" onClick={onQuizClick}>
+
+              <Button mt={4} colorScheme="blue">
                 Start Quiz
               </Button>
             </Box>
@@ -72,9 +69,11 @@ const HomePage: React.FC<HomePageProps> = ({ onQuizClick, onDiagramClick }) => {
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Heading size="md">Your Aircraft</Heading>
               <Text mt={2}>Learn about your plane</Text>
-              <Button mt={4} colorScheme="blue" onClick={onDiagramClick}>
-                Learn
-              </Button>
+              <Link to="/diagram">
+                <Button mt={4} colorScheme="blue">
+                  Learn
+                </Button>
+              </Link>
             </Box>
           </SimpleGrid>
         </VStack>
