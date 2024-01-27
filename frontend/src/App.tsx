@@ -8,6 +8,8 @@ import ConfirmationScreen from "./components/ConfirmationScreen";
 import HomePage from "./components/HomePage"; // Make sure to import the HomePage component
 import AircraftDiagram from "./components/AircraftDiagram";
 import QuizPage from "./components/QuizPage.tsx";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import BottomTabNav from "./components/BottomTabNav.tsx";
 
 function App() {
   // State to manage the current step of the app
@@ -21,7 +23,6 @@ function App() {
   const handleConfirmed = () => setCurrentStep("homePage"); // Transition to HomePage after confirmation
   const handleQuizStart = () => setCurrentStep("quizLandingPage");
   const handleDiagramStart = () => setCurrentStep("diagramLandingPage");
-
 
   return (
     <>
@@ -39,14 +40,22 @@ function App() {
         <ConfirmationScreen onConfirmed={handleConfirmed} />
       )}
       {currentStep === "homePage" && ( // Render the HomePage component after confirmation
-        <HomePage onQuizClick={handleQuizStart}  onDiagramClick={handleDiagramStart}/> // Assuming you want to provide an option to start the quiz from the HomePage
+        <HomePage
+          onQuizClick={handleQuizStart}
+          onDiagramClick={handleDiagramStart}
+        /> // Assuming you want to provide an option to start the quiz from the HomePage
       )}
-      {currentStep === "quizLandingPage" && (
-        <QuizPage />
-      )}
-      {currentStep === "diagramLandingPage" && (
-        <AircraftDiagram />
-      )}
+      {currentStep === "quizLandingPage" && <QuizPage />}
+      {currentStep === "diagramLandingPage" && <AircraftDiagram />}
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/quiz" element={<QuizPage />} />
+          <Route path="/diagram" element={<AircraftDiagram />} />
+          {/* Define other routes as needed */}
+        </Routes>
+        <BottomTabNav /> {/* This ensures the nav is shown on every page */}
+      </Router>
     </>
   );
 }
