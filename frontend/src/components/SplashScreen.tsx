@@ -8,7 +8,7 @@ const SplashScreen = ({ onLoaded }) => {
     const timer = setTimeout(() => {
       setLoading(false);
       onLoaded(); // Callback function to signal that loading is complete
-    }, 3000); // Adjust the timeout duration as needed
+    }, 500); // Adjust the timeout duration as needed
 
     return () => clearTimeout(timer);
   }, [onLoaded]);

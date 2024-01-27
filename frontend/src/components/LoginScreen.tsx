@@ -37,8 +37,8 @@ const LoginScreen = ({ onLogin }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormControl>
-        <Button colorScheme="blue" onClick={handleLogin}>
-          Login
+        <Button colorScheme="blue" size="lg" onClick={handleLogin}>
+          Login with American Airlines account
         </Button>
       </VStack>
     </Box>
