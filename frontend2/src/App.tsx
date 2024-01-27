@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import BottomTabNav from "./components/BottomTabNav";
 import AircraftDiagram from "./components/AircraftDiagram";
+import QuizPage from "./components/QuizPage.tsx";
 // Import other pages/components you might have
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         {/* Add padding to account for the BottomTabNav height */}
         <Routes>
           <Route path="/" element={<HomePage />} />
+            <Route path="/quiz" element={<QuizPage />} />
           <Route path="/diagram" element={<AircraftDiagram />} />
           {/* Define other routes as needed */}
         </Routes>
