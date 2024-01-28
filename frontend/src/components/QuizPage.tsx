@@ -1,73 +1,75 @@
 // QuizPage.tsx
 import React, { useEffect, useState } from "react";
-import ImageLoader from "./ImageLoader.tsx"; // Importing the CSS for styling
 import { Button, Center, VStack, Text } from "@chakra-ui/react";
 import OpenAI from "openai";
+import {globalTopic} from "./GlobalTopic.tsx";
 
-interface IAnswer {
-  id: string;
-  text: string;
-}
-
-interface IQuestion {
+class IQuestion {
   question: string;
-  answers: IAnswer[];
-  correctAnswer: string;
-  explanation: string;
-  explanationMedia: string; // URL to an image or a video
+  options: string[];
+  answer: string;
+
+  constructor(question: string, options: string[], answer: string) {
+    this.question = question;
+    this.options = options;
+    this.answer = answer;
+  }
+
+  // You can also add methods to the class if needed
 }
 
 const fetchQuestions = async (): Promise<IQuestion[]> => {
   // TODO: Setup OpenAI API key
   // TODO: https://platform.openai.com/docs/quickstart?context=node#:~:text=for%20all%20projects-,(,-recommended)
 
-  const openai = new OpenAI();
-
-  const prompt =
-    "Imagine a child looking outside an airplane window. I want you to generate trivia quiz questions for the various landmarks that the child will presumably see to pique their interest into learning about that landmark. The questions should be simple and either be True/False or multiple choice. The questions should not involve any calculations or pattern matching. The questions and answer choices should not be overly wordy or complicated, use any jargon or complicated vocabulary, or cover controversial or inappropriate content. If questions are multiple-choice, they should have 4 answer choices, no less and no more. Remember, these questions should be answerable and appropriate by young children.\n" +
-    "\n" +
-    'However, be sure not to ask questions whose answers are explicitly stated or otherwise immediately obvious. For example, consider the question, "Which country is the Great Wall of China located in?" The answer is explicitly stated, making the question unusable for learning.\n' +
-    "\n" +
-    "Now that you know the regulations for these quiz questions, please generate 2 to 4 questions on the Pyramids of Giza. Please output the questions in .JSON format to make for easier processing.";
+  const openai = new OpenAI({apiKey: "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", dangerouslyAllowBrowser: true });
 
   const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: prompt }],
+    messages: [{ role: "system", content: "Create 5 simple trivia quiz questions about the " + globalTopic["topic"] + ", suitable for young children. Ensure the questions are True/False or multiple choice with 4 answer choices, avoid complex language or controversial content, and do not involve calculations or patterns. Listed below is an example of a good output. Do not reply to me with a greeting at all.\n" +
+          "\n" +
+          "\"question|True or False: The Pyramids of Giza are one of the Seven Wonders of the Ancient World.|answer|True|options|True|False\\n\" +\n" +
+          "      \"question|Which river flows near the Pyramids of Giza?|answer|Nile|options|Nile|Amazon|Mississippi|Yangtze\\n\" +\n" +
+          "      \"question|What shape are the Pyramids of Giza?|answer|Triangle|options|Triangle|Square|Circle|Hexagon\\n\";"}],
     model: "gpt-3.5-turbo",
   });
 
-  const questionsArray: IQuestion[] = JSON.parse(
-    completion.choices[0].message.content as string
-  );
+  const output = completion.choices[0].message.content as string;
 
-  return questionsArray.length > 0
-    ? questionsArray
-    : [
-        {
-          question: "What is the capital of Texas?",
-          answers: [
-            { id: "a", text: "Austin" },
-            { id: "b", text: "Dallas" },
-            { id: "c", text: "San Antonio" },
-            { id: "d", text: "Houston" },
-            // More answers...
-          ],
-          correctAnswer: "a",
-          explanation: "Austin is the capital of Texas.",
-          explanationMedia:
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/View_of_Downtown_Austin_from_Pfluger_Pedestrian_Bridge_October_2022.jpg/640px-View_of_Downtown_Austin_from_Pfluger_Pedestrian_Bridge_October_2022.jpg", // Replace with actual URL
-        },
-        {
-          question: "What is the capital of France?",
-          answers: [
-            { id: "a", text: "Marseille" },
-            { id: "b", text: "Paris" },
-            // More answers...
-          ],
-          correctAnswer: "b",
-          explanation: "Paris is the capital of France.",
-          explanationMedia: "https://example.com/image_or_video_url.jpg", // Replace with actual URL
-        },
-      ];
+  const lines = output.split("\n");
+
+  let questionsArray = [];
+
+  for (let i = 0; i < lines.length - 1; i++) {
+    let temp = lines[i].substring("question".length + 1);
+    let question = temp.substring(0, temp.indexOf("|"));
+    temp = temp.substring(temp.indexOf("|") + 1);
+
+    temp = temp.substring(temp.indexOf("|") + 1);
+
+    let answer = temp.substring(0, temp.indexOf("|"));
+    temp = temp.substring(temp.indexOf("|") + 1);
+
+    temp = temp.substring(temp.indexOf("|") + 1);
+
+    let options = temp;
+    temp = temp.substring(temp.indexOf("|") + 1);
+
+    let optionsArr = options.split("|");
+
+    console.log({question});
+    console.log({answer});
+    console.log({options});
+
+    questionsArray[i] = new IQuestion(
+        question,
+        optionsArr,
+        answer,
+    );
+  }
+
+  console.log(questionsArray);
+
+  return questionsArray;
 };
 
 const QuizPage: React.FC = () => {
@@ -95,7 +97,7 @@ const QuizPage: React.FC = () => {
     setIsAnswerSubmitted(true);
     setShowExplanation(true);
     // Update correct and incorrect count
-    if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
+    if (selectedAnswer === questions[currentQuestionIndex].answer) {
       setCorrectCount(correctCount + 1);
     } else {
       setIncorrectCount(incorrectCount + 1);
@@ -127,15 +129,15 @@ const QuizPage: React.FC = () => {
       <VStack spacing={4}>
         <Text fontSize="2xl">{questions[currentQuestionIndex].question}</Text>
         <VStack>
-          {questions[currentQuestionIndex].answers.map((answer: IAnswer) => (
+          {questions[currentQuestionIndex].options.map((answer: string) => (
             <Button
-              key={answer.id}
-              onClick={() => handleAnswerSelect(answer.id)}
+              key={answer}
+              onClick={() => handleAnswerSelect(answer)}
               colorScheme="blue"
               isDisabled={isAnswerSubmitted}
-              variant={selectedAnswer === answer.id ? "solid" : "outline"}
+              variant={selectedAnswer === answer ? "solid" : "outline"}
             >
-              {answer.text}
+              {answer}
             </Button>
           ))}
         </VStack>
@@ -147,13 +149,9 @@ const QuizPage: React.FC = () => {
         {showExplanation && (
           <VStack>
             <Text>
-              {selectedAnswer === questions[currentQuestionIndex].correctAnswer
-                ? `Correct! ${questions[currentQuestionIndex].explanation}`
-                : `Incorrect. ${questions[currentQuestionIndex].explanation}`}
+              {selectedAnswer === questions[currentQuestionIndex].answer
+                ? "Correct!" : "Incorrect."}
             </Text>
-            <ImageLoader
-              src={questions[currentQuestionIndex].explanationMedia}
-            />
             <Button colorScheme="blue" onClick={handleNextQuestion}>
               Next Question
             </Button>

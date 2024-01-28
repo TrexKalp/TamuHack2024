@@ -44,7 +44,7 @@ const BottomTabNav = () => {
           color="white"
         />
       </Link>
-      <Link to="/quiz">
+      <Link to="/quizselection">
         <IconButton
           aria-label="Quiz"
           icon={<FaQuestionCircle />}
