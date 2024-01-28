@@ -43,33 +43,41 @@ const HomePage: React.FC = () => {
   const [flightData, setFlightData] = useState<any | null>(null);
   const [fromIATA, setFromIATA] = useState("DFW");
   const [toIATA, setToIATA] = useState("PHL");
+  const storedFlightNumber = localStorage.getItem("flightNumber");
 
   useEffect(() => {
-    const storedFlightNumber = localStorage.getItem("flightNumber");
-    if (storedFlightNumber) {
-      setLocalFlightNumber(storedFlightNumber);
-    } else {
-      setLocalFlightNumber("0234");
-    }
-  }, []);
+    const changeNum = () => {
+      if (storedFlightNumber) {
+        setLocalFlightNumber(storedFlightNumber);
+      } else {
+        setLocalFlightNumber("0234");
+      }
+    };
+    changeNum();
+  }, [storedFlightNumber]);
 
   useEffect(() => {
-    if (localFlightNumber) {
-      fetch(
-        `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
-      )
-        .then((response) => response.json())
-        .then((data) => setFlightData(data[0]))
-        .catch((error) => console.error("Error fetching flight data:", error));
-    }
-    if (flightData) {
-      setFromIATA(flightData.origin.code);
-      setToIATA(flightData.destination.code);
-    } else {
-      setFromIATA("DFW");
-      setToIATA("PHL");
-    }
+      if (localFlightNumber) {
+        fetch(
+          `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
+        )
+          .then((response) => response.json())
+          .then((data) => setFlightData(data[0]))
+          .catch((error) =>
+            console.error("Error fetching flight data:", error)
+          );
+      };
   }, [localFlightNumber]);
+
+  useEffect(() => {
+      if (flightData) {
+        setFromIATA(flightData.origin.code);
+        setToIATA(flightData.destination.code);
+      } else {
+        setFromIATA("DFW");
+        setToIATA("PHL");
+      }
+  }, [flightData]);
 
   const [fromICAO, setFromICAO] = useState("");
   const [toICAO, setToICAO] = useState("");
