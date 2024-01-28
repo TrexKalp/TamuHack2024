@@ -3,6 +3,10 @@ import { GoogleMap, LoadScript, Polyline } from "@react-google-maps/api";
 
 const FlightMap = ({ encodedPolyline }) => {
   const [path, setPath] = useState([]);
+  const containerStyle = {
+    borderRadius: "20px", // Adjust the value to achieve the desired roundness
+    overflow: "hidden", // Ensure the map corners are clipped to the border radius
+  };
   function decodePolyline(encoded) {
     let points = [];
     let index = 0,
@@ -48,20 +52,22 @@ const FlightMap = ({ encodedPolyline }) => {
 
   return (
     <LoadScript googleMapsApiKey="AIzaSyALs4j7Aw0B1OVAnxV2r9PQ-0WtIp1B9lI">
-      <GoogleMap
-        mapContainerStyle={{ width: "400px", height: "400px" }}
-        center={path[0]} // Set the center to the first point in the path
-        zoom={10}
-      >
-        <Polyline
-          path={path}
-          options={{
-            strokeColor: "#FF0000",
-            strokeOpacity: 1.0,
-            strokeWeight: 2,
-          }}
-        />
-      </GoogleMap>
+      <div style={containerStyle}>
+        <GoogleMap
+          mapContainerStyle={{ width: "400px", height: "400px" }}
+          center={path[15]} // Set the center to the first point in the path
+          zoom={2}
+        >
+          <Polyline
+            path={path}
+            options={{
+              strokeColor: "#FF0000",
+              strokeOpacity: 1.0,
+              strokeWeight: 2,
+            }}
+          />
+        </GoogleMap>
+      </div>
     </LoadScript>
   );
 };
