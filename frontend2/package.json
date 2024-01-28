@@ -15,6 +15,8 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@react-google-maps/api": "^2.19.2",
+    "@react-three/fiber": "^8.15.15",
+    "@types/three": "^0.160.0",
     "framer-motion": "^11.0.3",
     "http-proxy-middleware": "^2.0.6",
     "leaflet": "^1.9.4",
@@ -24,6 +26,8 @@
     "react-icons": "^5.0.1",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.21.3",
+    "three": "^0.160.1",
+    "three-collada-loader": "^0.0.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {

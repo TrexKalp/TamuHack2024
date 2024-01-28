@@ -25,20 +25,11 @@ import FlightMap from "./FlightMap";
 import PlacesDisplay from "./PlacesDisplay";
 import FlightCall from "./FlightCall";
 import Leaderboard from "./Leaderboard";
+import DaeModel from "./DaeModel";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
   const cardBgColor = useColorModeValue("white", "gray.800");
-
-  const images = [
-    "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg",
-    "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg",
-    "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg",
-    "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg",
-    "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg",
-    "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg",
-    "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg",
-  ];
 
   const [localFlightNumber, setLocalFlightNumber] = useState<string>("");
   const [flightData, setFlightData] = useState<any | null>(null);
@@ -142,6 +133,7 @@ const HomePage: React.FC = () => {
         if (result.length > 0 && result[0].encodedPolyline) {
           // Update the state with the encodedPolyline
           setEncodedPolyline(result[0].encodedPolyline);
+          localStorage.setItem("encodedPolyline", result[0].encodedPolyline);
         } else {
           console.error("encodedPolyline not found in the API response");
         }
@@ -157,7 +149,7 @@ const HomePage: React.FC = () => {
   const mapCenter = { lat: 40.714, lng: -74.005 }; // Example: New York City
 
   return (
-    <Flex direction="column" h="100vh" mb="800px">
+    <Flex direction="column" h="100vh" mb="1000px">
       <Box minH="100vh" py={5}>
         <VStack spacing={4}>
           <Heading>American Companion</Heading>

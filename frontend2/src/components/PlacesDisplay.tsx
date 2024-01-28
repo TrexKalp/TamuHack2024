@@ -1,109 +1,185 @@
 import React, { useState, useEffect } from "react";
-import { Box, Image, Text, HStack, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  VStack,
+  Text,
+  Flex,
+  Icon,
+  useColorModeValue,
+  Fade,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Badge,
+  Button,
+  Image,
+  LinkBox,
+  LinkOverlay,
+  IconButton,
+} from "@chakra-ui/react";
 import axios from "axios";
+import { Tooltip } from "@chakra-ui/react";
+import { FaMapMarkedAlt, FaMapPin, FaStreetView } from "react-icons/fa";
 
-interface Place {
-  displayName: {
-    text: string;
-    languageCode: string;
+interface PlaceFeature {
+  properties: {
+    name: string;
   };
 }
 
+interface PlacesResponse {
+  features: PlaceFeature[];
+}
+
+// Function to decode polyline
+function decodePolyline(encoded) {
+  let points = [];
+  let index = 0,
+    len = encoded.length;
+  let lat = 0,
+    lng = 0;
+
+  while (index < len) {
+    let b,
+      shift = 0,
+      result = 0;
+    do {
+      b = encoded.charCodeAt(index++) - 63;
+      result |= (b & 0x1f) << shift;
+      shift += 5;
+    } while (b >= 0x20);
+
+    let dlat = result & 1 ? ~(result >> 1) : result >> 1;
+    lat += dlat;
+
+    shift = 0;
+    result = 0;
+    do {
+      b = encoded.charCodeAt(index++) - 63;
+      result |= (b & 0x1f) << shift;
+      shift += 5;
+    } while (b >= 0x20);
+
+    let dlng = result & 1 ? ~(result >> 1) : result >> 1;
+    lng += dlng;
+
+    points.push({ lat: lat / 1e5, lng: lng / 1e5 });
+  }
+
+  return points;
+}
+
 const PlacesDisplay: React.FC = () => {
-  const [places, setPlaces] = useState<Place[]>([]);
+  const [places, setPlaces] = useState<PlaceFeature[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [localFlightNumber, setLocalFlightNumber] = useState<string>("");
-  const [flightData, setFlightData] = useState<any | null>(null);
 
   useEffect(() => {
-    const storedFlightNumber = localStorage.getItem("flightNumber");
-    if (storedFlightNumber) {
-      setLocalFlightNumber(storedFlightNumber);
-    }
-  }, []);
+    const encodedPolyline = localStorage.getItem("encodedPolyline");
+    if (encodedPolyline) {
+      const points = decodePolyline(encodedPolyline);
 
-  useEffect(() => {
-    if (localFlightNumber) {
-      fetch(
-        `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
-      )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if (data.length > 0) {
-            setFlightData(data[0]);
-          } else {
-            console.log("No flight data found for this flight number");
-          }
-        })
-        .catch((error) => console.error("Error fetching flight data:", error));
-    } else {
-      console.log("No local flight number found");
-    }
-  }, [localFlightNumber]);
+      // Sample points if there are too many to manage API requests
+      points.forEach((point, index) => {
+        if (index % 5 === 0) {
+          // Example: Fetch places for every 10th point
+          const options = {
+            method: "GET",
+            url: "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius",
+            params: {
+              radius: "8000",
+              lon: point.lng.toString(),
+              lat: point.lat.toString(),
+              kinds: "museums,architecture",
+              limit: "10",
+            },
+            headers: {
+              "X-RapidAPI-Key":
+                "c21c76fa2fmshca97611323aace0p1c3a66jsn9faa413d8ab5",
+              "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
+            },
+          };
 
-  useEffect(() => {
-    const options = {
-      method: "GET",
-      url: "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius",
-      params: {
-        radius: "250",
-        lon: "38.364285",
-        lat: "59.855685",
-      },
-      headers: {
-        "X-RapidAPI-Key": "c21c76fa2fmshca97611323aace0p1c3a66jsn9faa413d8ab5",
-        "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
-      },
-    };
-
-    axios
-      .request(options)
-      .then((response) => {
-        setPlaces(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setError("Error fetching places");
-        setLoading(false);
+          axios
+            .request<PlacesResponse>(options)
+            .then((response) => {
+              setPlaces((prevPlaces) => [
+                ...new Set([...prevPlaces, ...response.data.features]),
+              ]);
+            })
+            .catch((error) => {
+              console.error(error);
+              setError("Error fetching places");
+            });
+        }
       });
+
+      setLoading(false);
+    } else {
+      setError("No encoded polyline found");
+      setLoading(false);
+    }
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <Box>Loading...</Box>;
+  if (error) return <Box>Error: {error}</Box>;
 
-  const placeholderImageUrl =
-    "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg"; // URL of the placeholder image
+  const bg = useColorModeValue("white", "gray.700");
+  const hoverBg = useColorModeValue("gray.50", "gray.600");
+  const borderColor = useColorModeValue("gray.200", "gray.500");
 
   return (
-    <VStack spacing={4} align="stretch">
-      <HStack overflowX="auto" spacing={4} p={4}>
-        {places.features.map((place, index) => (
-          <Box key={index} position="relative" minW="200px">
-            <Image
-              src={placeholderImageUrl}
-              alt={place.properties.name}
-              borderRadius="md"
-            />
-            <Text
-              position="absolute"
-              bottom="0"
-              width="100%"
-              textAlign="center"
-              bgColor="rgba(0, 0, 0, 0.5)"
-              color="white"
+    <VStack spacing={5} align="stretch" p={5}>
+      {places.slice(0, 8).map(
+        (place, index) =>
+          place.properties.name && (
+            <LinkBox
+              key={index}
+              as="article"
+              p="5"
+              bg={bg}
+              borderWidth="1px"
+              borderRadius="lg"
+              shadow="md"
+              borderColor={borderColor}
+              _hover={{
+                bg: hoverBg,
+                transform: "translateY(-2px)",
+                transition: "all .2s ease-in-out",
+              }}
             >
-              {place.properties.name}
-            </Text>
-          </Box>
-        ))}
-      </HStack>
+              <Flex justify="space-between" align="center">
+                <Flex align="center">
+                  <Icon as={FaMapPin} color="red.500" boxSize={5} mr={2} />
+                  <Text fontSize="lg" fontWeight="bold" mr={2}>
+                    <LinkOverlay
+                      href={`https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${place.geometry.coordinates[1]},${place.geometry.coordinates[0]}`}
+                      isExternal
+                    >
+                      {place.properties.name}
+                    </LinkOverlay>
+                  </Text>
+                </Flex>
+                <Tooltip label="View Street View" hasArrow>
+                  <IconButton
+                    as="a"
+                    href={`https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${place.geometry.coordinates[1]},${place.geometry.coordinates[0]}`}
+                    aria-label="View Street View"
+                    icon={<FaStreetView />}
+                    size="sm"
+                    colorScheme="teal"
+                    variant="ghost"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                </Tooltip>
+              </Flex>
+              {/* Additional details or interactive elements can be added here */}
+            </LinkBox>
+          )
+      )}
     </VStack>
   );
 };
