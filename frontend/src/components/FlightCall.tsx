@@ -24,14 +24,12 @@ import {
 } from "react-icons/fa";
 
 const FlightCall: React.FC = () => {
-  const [localFlightNumber, setLocalFlightNumber] = useState<string>("");
+  const [localFlightNumber, setLocalFlightNumber] = useState(localStorage.getItem("flightNumber") && "4378");
   const [flightData, setFlightData] = useState<any | null>(null);
 
   useEffect(() => {
-    const storedFlightNumber = localStorage.getItem("flightNumber");
-    if (storedFlightNumber) {
+      const storedFlightNumber = localStorage.getItem("flightNumber");
       setLocalFlightNumber(storedFlightNumber);
-    }
   }, []);
 
   useEffect(() => {
