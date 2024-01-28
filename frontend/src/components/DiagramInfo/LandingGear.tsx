@@ -29,14 +29,15 @@ const LandingGear = () => {
       <br></br>
       <p>
         During the process of landing, the landing gear{" "}
-        <strong>extends once again</strong>. If you hear a loud thud when the plane is about to land, it's probably the landing gear deploying!
+        <strong>extends once again</strong>. If you hear a loud thud when the
+        plane is about to land, it's probably the landing gear deploying!
       </p>
       <br></br>
       <Box>
         <Image src="..\..\src\assets\engineer.jpg" />
       </Box>
       <br></br>
-      <p style={{ marginBottom: "10vh" }}>
+      <p>
         Engineers carefully consider their designs to create landing gear
         systems that not only provide stability on the ground but also
         contribute to the
