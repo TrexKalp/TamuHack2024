@@ -28,7 +28,6 @@ import FlightCall from "./FlightCall";
 import Leaderboard from "./Leaderboard";
 import DaeModel from "./DaeModel";
 import landing from "../assets/airlines.png";
-import { globalTopic } from "./GlobalTopic.tsx";
 import FlightLeaderboard from "./FlightLeaderboard.tsx";
 
 const HomePage: React.FC = () => {
@@ -48,7 +47,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     const manageMap = async () => {
-      setLocalFlightNumber(storedFlightNumber ?? "0123");
+      setLocalFlightNumber(storedFlightNumber ?? "    ");
     };
     manageMap();
   });
@@ -79,22 +78,15 @@ const HomePage: React.FC = () => {
   }, [localFlightNumber]);
 
   useEffect(() => {
-    if (flightData) {
-      setFromIATA(flightData.origin.code);
-      setToIATA(flightData.destination.code);
-      globalTopic["topic"] = flightData.destination.code;
-    } else {
-      setFromIATA("DFW");
-      setToIATA("PHL");
-      globalTopic["topic"] = "Philadelphia";
-    }
-  }, [flightData]);
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://api.api-ninjas.com/v1/airports?iata=${fromIATA}&X-Api-key=nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z`
+          `https://api.api-ninjas.com/v1/airports?iata=${fromIATA}`,
+          {
+            headers: {
+              "X-Api-key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
+            },
+          }
         );
 
         setFromICAO(response.data[0].icao);
@@ -110,7 +102,12 @@ const HomePage: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://api.api-ninjas.com/v1/airports?iata=${toIATA}&X-Api-key=nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z`
+          `https://api.api-ninjas.com/v1/airports?iata=${toIATA}`,
+          {
+            headers: {
+              "X-Api-key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
+            },
+          }
         );
 
         setToICAO(response.data[0].icao);
@@ -125,8 +122,15 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const apiKey = "8tmSfVuqXzTZVsdIhvhkjbjIMUQnqAuzxhMcBeV7"; // Replace with your API key
+
         const response = await axios.get(
-          `https://cors-anywhere.herokuapp.com/https://api.flightplandatabase.com/search/plans?fromICAO=${fromICAO}&toICAO=${toICAO}&limit=1`
+          `https://cors-anywhere.herokuapp.com/https://api.flightplandatabase.com/search/plans?fromICAO=${fromICAO}&toICAO=${toICAO}&limit=1`,
+          {
+            headers: {
+              Authorization: `Basic ${btoa(`${apiKey}:`)}`,
+            },
+          }
         );
 
         setEncodedPolyline(response.data[0].encodedPolyline);
