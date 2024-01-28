@@ -52,6 +52,9 @@ const QuizSelection = () => {
   const handleButtonClick = (quizName: string) => {
     globalTopic["topic"] = quizName;
     // Additional logic here if needed
+    if (quizName === "Landmarks") {
+      globalTopic["topic"] = globalTopic["landmarkTopic"];
+    }
   };
 
   return (

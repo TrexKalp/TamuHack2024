@@ -1,3 +1,2 @@
 
-export let globalTopic: string = {topic: "Philadelphia"};
-export let globalProfiles: string = {topic: "Profile"};
+export let globalTopic: string = {topic: "Philadelphia", landmarkTopic: "Philadelphia"};

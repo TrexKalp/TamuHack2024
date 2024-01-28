@@ -29,6 +29,7 @@ import Leaderboard from "./Leaderboard";
 import DaeModel from "./DaeModel";
 import landing from "../assets/airlines.png";
 import FlightLeaderboard from "./FlightLeaderboard.tsx";
+import {globalTopic} from "./GlobalTopic.tsx";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
@@ -42,9 +43,6 @@ const HomePage: React.FC = () => {
   const [fromICAO, setFromICAO] = useState("");
   const [toICAO, setToICAO] = useState("");
   const [polyline, setEncodedPolyline] = useState("");
-
-  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-
   useEffect(() => {
     const manageMap = async () => {
       setLocalFlightNumber(storedFlightNumber ?? "    ");
@@ -66,6 +64,7 @@ const HomePage: React.FC = () => {
           setFlightData(data[0]);
           setFromIATA(data[0].origin.code);
           setToIATA(data[0].destination.code);
+          globalTopic["landmarkTopic"] = "City that has the airport " + data[0].destination.code;
         } else {
           console.error("Flight data not found.");
         }
