@@ -8,7 +8,6 @@ const Engine = () => {
       <h2>
         <strong>Engines</strong>
       </h2>
-      <br></br>
       <p>
         Engines make the <strong>tremendous power</strong> needed to propel the
         aircraft through the sky.

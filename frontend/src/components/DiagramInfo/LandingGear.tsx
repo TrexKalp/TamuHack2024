@@ -8,7 +8,6 @@ const LandingGear = () => {
       <h2>
         <strong>Landing gear</strong>
       </h2>
-      <br></br>
       <p>
         Landing gear are essentially the aircraft's <strong>legs</strong>.
       </p>
