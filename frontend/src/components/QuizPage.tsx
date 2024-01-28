@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Center, VStack, Text } from "@chakra-ui/react";
 import OpenAI from "openai";
+import {globalTopic} from "./GlobalTopic.tsx";
 
 class IQuestion {
   question: string;
@@ -24,7 +25,7 @@ const fetchQuestions = async (): Promise<IQuestion[]> => {
   const openai = new OpenAI({apiKey: "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", dangerouslyAllowBrowser: true });
 
   const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "Create 5 simple trivia quiz questions about the France, suitable for young children. Ensure the questions are True/False or multiple choice with 4 answer choices, avoid complex language or controversial content, and do not involve calculations or patterns. Listed below is an example of a good output. Do not reply to me with a greeting at all.\n" +
+    messages: [{ role: "system", content: "Create 5 simple trivia quiz questions about the " + globalTopic["topic"] + ", suitable for young children. Ensure the questions are True/False or multiple choice with 4 answer choices, avoid complex language or controversial content, and do not involve calculations or patterns. Listed below is an example of a good output. Do not reply to me with a greeting at all.\n" +
           "\n" +
           "\"question|True or False: The Pyramids of Giza are one of the Seven Wonders of the Ancient World.|answer|True|options|True|False\\n\" +\n" +
           "      \"question|Which river flows near the Pyramids of Giza?|answer|Nile|options|Nile|Amazon|Mississippi|Yangtze\\n\" +\n" +
