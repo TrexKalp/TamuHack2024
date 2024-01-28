@@ -7,6 +7,7 @@ const FlightMap = ({ encodedPolyline }) => {
     borderRadius: "20px", // Adjust the value to achieve the desired roundness
     overflow: "hidden", // Ensure the map corners are clipped to the border radius
   };
+
   function decodePolyline(encoded) {
     let points = [];
     let index = 0,

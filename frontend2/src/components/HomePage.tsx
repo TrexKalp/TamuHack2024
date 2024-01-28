@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import { SearchIcon, BellIcon } from "@chakra-ui/icons";
 import logo from "../assets/logolong.png";
 import FlightMap from "./FlightMap";
+import PlacesDisplay from "./PlacesDisplay";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
@@ -49,9 +50,10 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <Flex direction="column" h="100vh" mb="250px">
+    <Flex direction="column" h="100vh" mb="800px">
       <Box minH="100vh" py={5}>
         <VStack spacing={4}>
+          <PlacesDisplay />
           <Heading>American Companion</Heading>
 
           <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2}>
