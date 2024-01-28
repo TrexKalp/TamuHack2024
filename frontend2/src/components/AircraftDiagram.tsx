@@ -23,11 +23,10 @@ const AircraftDiagram = () => {
       case "area1":
         console.log("Clicked on Area 1");
         setInfoText(
-          "Imagine a plane's engines as the high-tech muscle of a superhero. These engines, usually attached to the wings or the body of the plane, are responsible for generating the tremendous power needed to propel the aircraft through the sky.\n" +
-            "Now, let's talk about the magic happening inside these engines. Picture a giant vacuum cleaner. The engines |breathe in\" massive amounts of air. But it's not just regular air; it's mixed with a special potion called fuel. This mixture is then ignited, creating a controlled explosion that releases an incredible amount of energy.\n" +
-            "Newton's third law says that every action has an equal and opposite reaction. The powerful explosion inside the engine creates a force that gets pushed out of the back of the engine at an extremely high speed. This force, also known as thrust, is what makes the plane zoom forward through the air.\n" +
-            "It's like blowing up a balloon and letting it go, but on a much larger and more controlled scale. The engines continuously repeat this process, keeping the plane moving forward and upward against the force of gravity.\n" +
-            "So, in simple terms, the engines are like the superhero heart and muscles of a plane, using the magic of controlled explosions to create the thrust needed for the aircraft to conquer the sky."
+          "Engines make the tremendous power needed to propel the aircraft through the sky.\n" +
+            "The engines \"breathe in\" massive amounts of air, mix it with fuel, and then ignite it, creating a controlled explosion that releases an incredible amount of energy.\n" +
+            "The powerful explosion inside the engine creates a force that gets pushed out of the back of the engine at an extremely high speed. This force, also known as thrust, is what makes the plane zoom forward through the air.\n" +
+            "It's like blowing up a balloon and letting it go, but on a much larger and more controlled scale."
         );
         break;
       case "area2":
