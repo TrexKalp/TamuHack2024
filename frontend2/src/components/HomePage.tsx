@@ -24,6 +24,7 @@ import logo from "../assets/logolong.png";
 import FlightMap from "./FlightMap";
 import PlacesDisplay from "./PlacesDisplay";
 import FlightCall from "./FlightCall";
+import Leaderboard from "./Leaderboard";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
@@ -57,26 +58,24 @@ const HomePage: React.FC = () => {
   }, [storedFlightNumber]);
 
   useEffect(() => {
-      if (localFlightNumber) {
-        fetch(
-          `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
-        )
-          .then((response) => response.json())
-          .then((data) => setFlightData(data[0]))
-          .catch((error) =>
-            console.error("Error fetching flight data:", error)
-          );
-      };
+    if (localFlightNumber) {
+      fetch(
+        `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
+      )
+        .then((response) => response.json())
+        .then((data) => setFlightData(data[0]))
+        .catch((error) => console.error("Error fetching flight data:", error));
+    }
   }, [localFlightNumber]);
 
   useEffect(() => {
-      if (flightData) {
-        setFromIATA(flightData.origin.code);
-        setToIATA(flightData.destination.code);
-      } else {
-        setFromIATA("DFW");
-        setToIATA("PHL");
-      }
+    if (flightData) {
+      setFromIATA(flightData.origin.code);
+      setToIATA(flightData.destination.code);
+    } else {
+      setFromIATA("DFW");
+      setToIATA("PHL");
+    }
   }, [flightData]);
 
   const [fromICAO, setFromICAO] = useState("");
@@ -193,6 +192,12 @@ const HomePage: React.FC = () => {
                 encodedPolyline={encodedPolyline}
                 style={{ marginRight: "20px" }}
               />
+
+              <Heading size="md" mt={5}>
+                Leaderboard
+                <Leaderboard />
+              </Heading>
+
               <Heading size="md" mt={5}>
                 Stops Along Your Trip
               </Heading>
