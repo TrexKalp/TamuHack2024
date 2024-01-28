@@ -28,7 +28,7 @@ import FlightCall from "./FlightCall";
 import Leaderboard from "./Leaderboard";
 import DaeModel from "./DaeModel";
 import landing from "../assets/airlines.png";
-import {globalTopic} from "./GlobalTopic.tsx";
+import { globalTopic } from "./GlobalTopic.tsx";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
@@ -89,8 +89,7 @@ const HomePage: React.FC = () => {
     }
   }, [flightData]);
 
-  const [fromICAO, setFromICAO] = useState("");
-  const [toICAO, setToICAO] = useState("");
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
