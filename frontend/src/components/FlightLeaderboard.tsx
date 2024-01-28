@@ -6,20 +6,32 @@ import {
   Text,
   Badge,
   useColorModeValue,
+  Icon,
 } from "@chakra-ui/react";
-
-// Adjusted list of members to 5 people with more detailed and believable names
-const members = [
-  { id: 1, name: "Emma Johnson", seat: "14A", points: 1200 },
-  { id: 2, name: "Noah Smith", seat: "14B", points: 1500 },
-  { id: 3, name: "Olivia Williams", seat: "14C", points: 1800 },
-  { id: 4, name: "Liam Brown", seat: "15A", points: 1600 },
-  { id: 5, name: "Sophia Jones", seat: "15B", points: 1100 },
-];
+import { MdOutlineEmojiEvents } from "react-icons/md"; // Import medal icon from react-icons
 
 const FlightMembers = () => {
   const bg = useColorModeValue("white", "gray.800");
   const borderColor = useColorModeValue("gray.200", "gray.600");
+
+  // Function to return the appropriate icon based on index
+  const getMedalIcon = (index) => {
+    const colorScheme = ["#FFD700", "#C0C0C0", "#CD7F32"];
+    return (
+      <Icon
+        as={MdOutlineEmojiEvents}
+        color={colorScheme[index]}
+        boxSize={6}
+        mr={2}
+      />
+    );
+  };
+
+  const members = [
+    { id: 1, name: "Emma Johnson", seat: "14A", points: 1800 },
+    { id: 2, name: "Noah Smith", seat: "14B", points: 1500 },
+    { id: 3, name: "Olivia Williams", seat: "14C", points: 1300 },
+  ];
 
   return (
     <VStack
@@ -44,6 +56,8 @@ const FlightMembers = () => {
           transition="all 0.2s ease-in-out"
         >
           <VStack spacing={2} align="start">
+            {index < 3 && getMedalIcon(index)}{" "}
+            {/* Display medal icon for top 3 members */}
             <Avatar
               name={member.name}
               src={`https://i.pravatar.cc/150?u=${member.id}`}
