@@ -27,7 +27,7 @@ const TopNav = () => {
           marginRight={"10px"}
         />
         <IconButton aria-label="Notifications" icon={<BellIcon />} />
-        <Badge ml="4" colorScheme="green">
+        <Badge ml="4" colorScheme="red">
           {points} Points
         </Badge>
       </Box>

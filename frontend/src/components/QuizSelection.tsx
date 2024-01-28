@@ -77,7 +77,7 @@ const QuizSelection = () => {
               <Center mt={3}>
                 <Button
                   leftIcon={quiz.icon}
-                  colorScheme="teal"
+                  colorScheme="red"
                   variant="solid"
                   onClick={() => handleButtonClick(quiz.name)}
                 >

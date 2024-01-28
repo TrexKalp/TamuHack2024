@@ -109,7 +109,7 @@ const Shop: React.FC = () => {
               <Badge
                 borderRadius="full"
                 px="2"
-                colorScheme={item.name === "Airbud" ? "orange" : "teal"}
+                colorScheme={item.name === "Airbud" ? "orange" : "blue"}
               >
                 {item.name === "Airbud" ? "Best Seller" : "New"}
               </Badge>
@@ -138,7 +138,7 @@ const Shop: React.FC = () => {
             <Box>{item.price} Points</Box>
 
             <Button
-              colorScheme={purchasedItems.includes(item.name) ? "gray" : "teal"}
+              colorScheme={purchasedItems.includes(item.name) ? "gray" : "blue"}
               variant="outline"
               width="full"
               mt={4}
@@ -151,7 +151,7 @@ const Shop: React.FC = () => {
             <Progress
               mt={5}
               value={(points / item.price) * 100}
-              colorScheme="green"
+              colorScheme="blue"
             />
           </Box>
         </Box>
