@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   VStack,
@@ -35,9 +35,17 @@ const HomePage: React.FC = () => {
     "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg",
   ];
 
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    fetch("http://localhost:3000")
+      .then((response) => response.text())
+      .then((data) => setText(data));
+  }, []);
+
   return (
     <Flex direction="column" h="100vh" mb="250px">
-      <Box bg={bgColor} minH="100vh" py={5}>
+      <Box minH="100vh" py={5}>
         <VStack spacing={4}>
           <Heading>American Companion</Heading>
 
