@@ -28,9 +28,9 @@ const FlightMembers = () => {
   };
 
   const members = [
-    { id: 1, name: "Emma Johnson", seat: "14A", points: 1800 },
+    { id: 1, name: "Emma Johnson", seat: "7A", points: 1800 },
     { id: 2, name: "Noah Smith", seat: "14B", points: 1500 },
-    { id: 3, name: "Olivia Williams", seat: "14C", points: 1300 },
+    { id: 3, name: "Olivia Williams", seat: "21C", points: 1300 },
   ];
 
   return (

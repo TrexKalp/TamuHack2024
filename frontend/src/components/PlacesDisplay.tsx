@@ -83,7 +83,7 @@ const PlacesDisplay: React.FC = () => {
 
       // Sample points if there are too many to manage API requests
       points.forEach((point, index) => {
-        if (index % 5 === 0) {
+        if (index % 4 === 0) {
           // Example: Fetch places for every 10th point
           const options = {
             method: "GET",
@@ -131,7 +131,7 @@ const PlacesDisplay: React.FC = () => {
   const borderColor = useColorModeValue("gray.200", "gray.500");
 
   return (
-    <VStack spacing={5} align="stretch" p={5}>
+    <VStack spacing={5} align="stretch" my={6}>
       {places.slice(0, 6).map(
         (place, index) =>
           place.properties.name && (
