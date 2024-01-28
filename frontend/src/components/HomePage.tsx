@@ -26,6 +26,7 @@ import PlacesDisplay from "./PlacesDisplay";
 import FlightCall from "./FlightCall";
 import Leaderboard from "./Leaderboard";
 import DaeModel from "./DaeModel";
+import landing from "../assets/airlines.png";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
@@ -149,7 +150,7 @@ const HomePage: React.FC = () => {
   const mapCenter = { lat: 40.714, lng: -74.005 }; // Example: New York City
 
   return (
-    <Flex direction="column" h="100vh" mb="1000px">
+    <Flex direction="column" h="100vh" marginBottom="100px">
       <Box minH="100vh" py={5}>
         <VStack spacing={4}>
           <Heading>American Companion</Heading>
@@ -157,7 +158,7 @@ const HomePage: React.FC = () => {
           <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2}>
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Image
-                src="https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg"
+                src={landing}
                 alt="Flight Quiz Logo"
                 style={{ width: "100%", height: "100%", borderRadius: "5%" }}
               />
@@ -219,7 +220,13 @@ const HomePage: React.FC = () => {
             </Box>
 
             {/* Diagram Section */}
-            <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
+            <Box
+              bg={cardBgColor}
+              p={4}
+              borderRadius="lg"
+              shadow="md"
+              mb="100px"
+            >
               <Heading size="md">Your Aircraft</Heading>
               <Text mt={2}>Learn about your plane</Text>
               <Link to="/diagram">
