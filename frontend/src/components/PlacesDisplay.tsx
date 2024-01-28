@@ -83,13 +83,13 @@ const PlacesDisplay: React.FC = () => {
 
       // Sample points if there are too many to manage API requests
       points.forEach((point, index) => {
-        if (index % 5 === 0) {
+        if (index % 1 === 0) {
           // Example: Fetch places for every 10th point
           const options = {
             method: "GET",
             url: "https://opentripmap-places-v1.p.rapidapi.com/en/places/radius",
             params: {
-              radius: "8000",
+              radius: "10000",
               lon: point.lng.toString(),
               lat: point.lat.toString(),
               kinds: "historical_places",

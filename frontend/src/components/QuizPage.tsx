@@ -1,8 +1,8 @@
 // QuizPage.tsx
 import React, { useEffect, useState } from "react";
-import { Button, Center, VStack, Text } from "@chakra-ui/react";
+import { Button, Center, VStack, Text, Flex } from "@chakra-ui/react";
 import OpenAI from "openai";
-import {globalTopic} from "./GlobalTopic.tsx";
+import { globalTopic } from "./GlobalTopic.tsx";
 
 class IQuestion {
   question: string;
@@ -22,14 +22,25 @@ const fetchQuestions = async (): Promise<IQuestion[]> => {
   // TODO: Setup OpenAI API key
   // TODO: https://platform.openai.com/docs/quickstart?context=node#:~:text=for%20all%20projects-,(,-recommended)
 
-  const openai = new OpenAI({apiKey: "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", dangerouslyAllowBrowser: true });
+  const openai = new OpenAI({
+    apiKey: "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",
+    dangerouslyAllowBrowser: true,
+  });
 
   const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "Create 5 simple trivia quiz questions about the " + globalTopic["topic"] + ", suitable for young children. Ensure the questions are True/False or multiple choice with 4 answer choices, avoid complex language or controversial content, and do not involve calculations or patterns. Listed below is an example of a good output. Do not reply to me with a greeting at all.\n" +
+    messages: [
+      {
+        role: "system",
+        content:
+          "Create 5 simple trivia quiz questions about the " +
+          globalTopic["topic"] +
+          ", suitable for young children. Ensure the questions are True/False or multiple choice with 4 answer choices, avoid complex language or controversial content, and do not involve calculations or patterns. Listed below is an example of a good output. Do not reply to me with a greeting at all.\n" +
           "\n" +
-          "\"question|True or False: The Pyramids of Giza are one of the Seven Wonders of the Ancient World.|answer|True|options|True|False\\n\" +\n" +
-          "      \"question|Which river flows near the Pyramids of Giza?|answer|Nile|options|Nile|Amazon|Mississippi|Yangtze\\n\" +\n" +
-          "      \"question|What shape are the Pyramids of Giza?|answer|Triangle|options|Triangle|Square|Circle|Hexagon\\n\";"}],
+          '"question|True or False: The Pyramids of Giza are one of the Seven Wonders of the Ancient World.|answer|True|options|True|False\\n" +\n' +
+          '      "question|Which river flows near the Pyramids of Giza?|answer|Nile|options|Nile|Amazon|Mississippi|Yangtze\\n" +\n' +
+          '      "question|What shape are the Pyramids of Giza?|answer|Triangle|options|Triangle|Square|Circle|Hexagon\\n";',
+      },
+    ],
     model: "gpt-3.5-turbo",
   });
 
@@ -56,15 +67,11 @@ const fetchQuestions = async (): Promise<IQuestion[]> => {
 
     let optionsArr = options.split("|");
 
-    console.log({question});
-    console.log({answer});
-    console.log({options});
+    console.log({ question });
+    console.log({ answer });
+    console.log({ options });
 
-    questionsArray[i] = new IQuestion(
-        question,
-        optionsArr,
-        answer,
-    );
+    questionsArray[i] = new IQuestion(question, optionsArr, answer);
   }
 
   console.log(questionsArray);
@@ -112,10 +119,10 @@ const QuizPage: React.FC = () => {
       setSelectedAnswer(null);
     } else {
       // No more questions, navigate to the home page or show a completion message
-      alert(
-        `Quiz completed! Correct answers: ${correctCount}, Incorrect answers: ${incorrectCount}`
-      );
+      alert(`Quiz completed! You have gained ${correctCount} points!`);
       // TODO: Replace the above alert with API call to backend
+      const points = Number(localStorage.getItem("points")) || 0;
+      localStorage.setItem("points", String(points + correctCount));
     }
   };
 
@@ -125,9 +132,11 @@ const QuizPage: React.FC = () => {
   }
 
   return (
-    <Center>
+    <Flex direction="column" align="center" justify="center" height="80vh">
       <VStack spacing={4}>
-        <Text fontSize="2xl">{questions[currentQuestionIndex].question}</Text>
+        <Text fontSize="2xl" textAlign="center">
+          {questions[currentQuestionIndex].question}
+        </Text>
         <VStack>
           {questions[currentQuestionIndex].options.map((answer: string) => (
             <Button
@@ -150,7 +159,8 @@ const QuizPage: React.FC = () => {
           <VStack>
             <Text>
               {selectedAnswer === questions[currentQuestionIndex].answer
-                ? "Correct!" : "Incorrect."}
+                ? "Correct!"
+                : "Incorrect."}
             </Text>
             <Button colorScheme="blue" onClick={handleNextQuestion}>
               Next Question
@@ -158,7 +168,7 @@ const QuizPage: React.FC = () => {
           </VStack>
         )}
       </VStack>
-    </Center>
+    </Flex>
   );
 };
 

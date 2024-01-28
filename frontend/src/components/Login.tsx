@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext"; // Adjust the import path as necessary
-import { FaPlane } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaPlane } from "react-icons/fa";
 import logo from "../assets/imagesquare.png";
 
 const Login: React.FC = () => {
@@ -88,9 +88,49 @@ const Login: React.FC = () => {
         </Heading>
         <Image src={logo} alt="Flight Quiz Logo" />
         <Text fontSize="lg" color={useColorModeValue("gray.600", "gray.200")}>
-          Enter your flight number to proceed
+          Log into your account to proceed!
         </Text>
         <Box w="full">
+          <FormControl id="email">
+            <FormLabel>Email</FormLabel>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<FaEnvelope color="gray.300" />}
+              />
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                color={inputTextColor}
+                borderColor={useColorModeValue("gray.300", "gray.600")}
+                _hover={{
+                  borderColor: useColorModeValue("gray.400", "whiteAlpha.800"),
+                }}
+                _placeholder={{ color: "gray.500" }}
+              />
+            </InputGroup>
+          </FormControl>
+          <FormControl id="password">
+            <FormLabel>Password</FormLabel>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<FaLock color="gray.300" />}
+              />
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                color={inputTextColor}
+                borderColor={useColorModeValue("gray.300", "gray.600")}
+                _hover={{
+                  borderColor: useColorModeValue("gray.400", "whiteAlpha.800"),
+                }}
+                _placeholder={{ color: "gray.500" }}
+              />
+            </InputGroup>
+          </FormControl>
           <FormControl id="flightNumber">
             <FormLabel>Flight Number</FormLabel>
             <InputGroup>
