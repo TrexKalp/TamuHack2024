@@ -69,7 +69,7 @@ const HomePage: React.FC = () => {
       const response = await fetch(url, {
         method: "GET",
         headers: {
-          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+          "X-Api-Key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
         },
       });
 
@@ -84,7 +84,7 @@ const HomePage: React.FC = () => {
       const response2 = await fetch(url2, {
         method: "GET",
         headers: {
-          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+          "X-Api-Key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
         },
       });
 
@@ -103,7 +103,7 @@ const HomePage: React.FC = () => {
   const [polyline, setEncodedPolyline] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchICAO = async () => {
       const username = "dJnwxZRcvhLLug8rb6KmGssOBlP4c73I6bIlgIT5";
       const password = "";
       const url = `https://cors-anywhere.herokuapp.com/https://api.flightplandatabase.com/search/plans?fromICAO=${fromICAO}&toICAO=${toICAO}&limit=1`;
@@ -129,7 +129,7 @@ const HomePage: React.FC = () => {
       }
     };
 
-    fetchData();
+    fetchICAO();
   }, [fromICAO, toICAO]);
 
   const encodedPolyline = polyline;
