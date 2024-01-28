@@ -40,8 +40,8 @@ const HomePage: React.FC = () => {
 
   const [text, setText] = useState("");
   const [polyline, setEncodedPolyline] = useState("");
-  const [fromICAO, setFromICAO] = useState('KIAH');
-  const [toICAO, setToICAO] = useState('EGLL');
+  const [fromICAO, setFromICAO] = useState("KIAH");
+  const [toICAO, setToICAO] = useState("EGLL");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,18 +95,42 @@ const HomePage: React.FC = () => {
                 alt="Flight Quiz Logo"
                 style={{ width: "100%", height: "100%", borderRadius: "5%" }}
               />
-              <Text
+              <Box
                 position="absolute"
-                top="50%"
-                left="50%"
-                transform="translate(-50%, -90%)"
-                color="white"
-                fontSize="xl"
-                fontWeight="bold"
-                textAlign="center"
+                top="0"
+                left="0"
+                width="100%"
+                height="100%"
+                borderRadius="5%"
+                overflow="hidden"
               >
-                Your Journey Just Got Better with Our Inflight Companion.
-              </Text>
+                <Box
+                  position="absolute"
+                  top="0"
+                  left="0"
+                  width="100%"
+                  height="100%"
+                  borderRadius="5%"
+                  overflow="hidden"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.3) 100%)",
+                  }}
+                />
+                <Text
+                  position="absolute"
+                  top="50%"
+                  left="50%"
+                  transform="translate(-50%, -50%)"
+                  color="white"
+                  fontSize="xl"
+                  fontWeight="bold"
+                  textAlign="center"
+                  zIndex="1"
+                >
+                  Your Journey Just Got Better with Our Inflight Companion.
+                </Text>
+              </Box>
             </Box>
 
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
