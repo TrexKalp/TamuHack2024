@@ -7,6 +7,7 @@ import {
   FaPlane,
   FaQuestionCircle,
   FaHome,
+  FaShoppingBag,
 } from "react-icons/fa";
 
 const BottomTabNav = () => {
@@ -31,7 +32,7 @@ const BottomTabNav = () => {
       <Link to="/shop">
         <IconButton
           aria-label="Landmark Map"
-          icon={<FaMapMarkedAlt />}
+          icon={<FaShoppingBag />}
           variant="ghost"
           color="white"
         />

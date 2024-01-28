@@ -83,7 +83,7 @@ const PlacesDisplay: React.FC = () => {
 
       // Sample points if there are too many to manage API requests
       points.forEach((point, index) => {
-        if (index % 1 === 0) {
+        if (index % 5 === 0) {
           // Example: Fetch places for every 10th point
           const options = {
             method: "GET",
@@ -97,7 +97,7 @@ const PlacesDisplay: React.FC = () => {
             },
             headers: {
               "X-RapidAPI-Key":
-                "c21c76fa2fmshca97611323aace0p1c3a66jsn9faa413d8ab5",
+                "710e73b16cmsh6805e995b5ca6b3p1a6384jsn459fe4a45b61",
               "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
             },
           };

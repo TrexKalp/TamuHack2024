@@ -147,7 +147,7 @@ const HomePage: React.FC = () => {
     <Flex direction="column" h="100vh" marginBottom="100px">
       <Box minH="100vh" py={5}>
         <VStack spacing={4}>
-          <Heading>American Companion</Heading>
+          <Heading>Welcome To Airbud!</Heading>
 
           <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2} mb={10}>
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">

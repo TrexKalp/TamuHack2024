@@ -9,7 +9,7 @@ import {
   Progress,
   useToast,
 } from "@chakra-ui/react";
-localStorage.setItem("points", "500");
+localStorage.setItem("points", "150");
 
 const Shop: React.FC = () => {
   const [points, setPoints] = useState(0); // Initialize points state
@@ -25,11 +25,11 @@ const Shop: React.FC = () => {
   }, []);
   const items = [
     {
-      name: "American Companion",
+      name: "Airbud Plushy",
       price: 100,
       image:
         "https://cdn.shoplightspeed.com/shops/635203/files/30922406/1024x1024x2/american-airlines-plush-plane.jpg",
-      description: "American Companion",
+      description: "Airbud Plushy",
     },
     {
       name: "American Airlines Coffee Mug",
@@ -109,11 +109,9 @@ const Shop: React.FC = () => {
               <Badge
                 borderRadius="full"
                 px="2"
-                colorScheme={
-                  item.name === "American Companion" ? "orange" : "teal"
-                }
+                colorScheme={item.name === "Airbud" ? "orange" : "teal"}
               >
-                {item.name === "American Companion" ? "Best Seller" : "New"}
+                {item.name === "Airbud" ? "Best Seller" : "New"}
               </Badge>
               <Box
                 color="gray.500"
