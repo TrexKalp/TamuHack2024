@@ -92,13 +92,12 @@ const HomePage: React.FC = () => {
               />
               {/* <Text
                 position="absolute"
-                top="50%"
-                left="50%"
-                transform="translate(-50%, -90%)"
-                color="white"
-                fontSize="xl"
-                fontWeight="bold"
-                textAlign="center"
+                top="0"
+                left="0"
+                width="100%"
+                height="100%"
+                borderRadius="5%"
+                overflow="hidden"
               >
                 Your Journey Just Got Better with Our Inflight Companion.
               </Text> */}
