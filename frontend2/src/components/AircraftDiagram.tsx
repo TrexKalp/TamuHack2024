@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Engine from "./DiagramInfo/Engine.tsx";
 import InfoText from "./DiagramInfo/InfoText.tsx";
+import LandingGear from "./DiagramInfo/LandingGear.tsx";
 
 import {
   Box,
@@ -21,7 +22,7 @@ const AircraftDiagram = () => {
   const [elementVisibility, setElementVisibility] = useState({
     infoText: true,
     engine: false,
-    element3: false,
+    gear: false,
   });
 
   const toggleVisibility = (elementId) => {
@@ -40,7 +41,6 @@ const AircraftDiagram = () => {
   return (
     <Box
       w="100vw"
-      h="100vh"
       bg={bgColor}
       display="flex"
       alignItems="top"
@@ -56,8 +56,8 @@ const AircraftDiagram = () => {
           <div
             style={{
               position: "absolute",
-              top: "30vw",
-              left: "42vw",
+              top: "28vw",
+              left: "40vw",
               width: "15vw",
               height: "15vw",
               backgroundColor: "rgba(106, 106, 107, 0.3)", // Red highlight (adjust color as needed)
@@ -69,19 +69,20 @@ const AircraftDiagram = () => {
             style={{
               position: "absolute",
               top: "35vw",
-              left: "76vw",
+              left: "74vw",
               width: "10vw",
               height: "10vw",
               backgroundColor: "rgba(106, 106, 107, 0.3)", // Blue highlight (adjust color as needed)
               borderRadius: "30%", // To make the highlight circular
             }}
-            /*onClick={() => handleClick("area2")}*/
+            onClick={() => toggleVisibility("gear")}
           ></div>
 
           <Image src="..\src\assets\plane_pic.jpg" />
         </div>
         {elementVisibility.infoText && <InfoText></InfoText>}
         {elementVisibility.engine && <Engine></Engine>}
+        {elementVisibility.gear && <LandingGear></LandingGear>}
       </VStack>
     </Box>
   );
