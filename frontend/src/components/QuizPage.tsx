@@ -32,9 +32,10 @@ const fetchQuestions = async (): Promise<IQuestion[]> => {
       {
         role: "system",
         content:
-          "Create 5 simple trivia quiz questions about the " +
+          "Create 5 insanely hard trivia quiz questions about the " +
           globalTopic["topic"] +
-          ", suitable for young children. Ensure the questions are True/False or multiple choice with 4 answer choices, avoid complex language or controversial content, and do not involve calculations or patterns. Listed below is an example of a good output. Do not reply to me with a greeting at all.\n" +
+          ", suitable only for geniuses. Ensure the questions are True/False or multiple choice with 4 answer choices, avoid complex language or controversial content, and do not involve calculations or patterns. Listed below is an example of a good output. Do not reply to me with a greeting at all." +
+            "Do not add any leading or trailing whitespace to any questions, answers, or in between any options." +
           "\n" +
           '"question|True or False: The Pyramids of Giza are one of the Seven Wonders of the Ancient World.|answer|True|options|True|False\\n" +\n' +
           '      "question|Which river flows near the Pyramids of Giza?|answer|Nile|options|Nile|Amazon|Mississippi|Yangtze\\n" +\n' +
