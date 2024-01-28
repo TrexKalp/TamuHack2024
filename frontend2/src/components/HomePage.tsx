@@ -63,10 +63,7 @@ const HomePage: React.FC = () => {
 
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Heading size="md">Flight Map</Heading>
-              <FlightMap
-                encodedPolyline={encodedPolyline}
-                mapCenter={mapCenter}
-              />
+              <FlightMap encodedPolyline={encodedPolyline} />
               <Heading size="md">Stops Along Your Trip</Heading>
               <Flex overflowX="scroll" mt={4}>
                 {images.map((image, index) => (
