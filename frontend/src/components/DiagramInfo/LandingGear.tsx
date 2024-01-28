@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Box, Image } from "@chakra-ui/react";
+
 const LandingGear = () => {
   return (
     <div>
@@ -11,8 +13,12 @@ const LandingGear = () => {
         Landing gear are essentially the aircraft's <strong>legs</strong>.
       </p>
       <br></br>
+      <Box>
+        <Image src="..\..\src\assets\landing_gear.jpeg" />
+      </Box>
+      <br></br>
       <p>
-        The landing gear comprises several elements, including robust 
+        The landing gear comprises several elements, including robust
         <strong> shock-absorbing</strong> struts and a set of wheels. When the
         plane is on the ground, the landing gear allows for smooth movement,
         almost <strong>like a car</strong>. However, as the plane ascends into
@@ -23,16 +29,18 @@ const LandingGear = () => {
       <br></br>
       <p>
         During the process of landing, the landing gear{" "}
-        <strong>extends once again</strong>. As the aircraft descends and makes
-        contact with the runway, the wheels and struts actively absorb the
-        forces involved in landing, ensuring a gradual and controlled touchdown.
+        <strong>extends once again</strong>. If you hear a loud thud when the plane is about to land, it's probably the landing gear deploying!
       </p>
+      <br></br>
+      <Box>
+        <Image src="..\..\src\assets\engineer.jpg" />
+      </Box>
       <br></br>
       <p style={{ marginBottom: "10vh" }}>
         Engineers carefully consider their designs to create landing gear
         systems that not only provide stability on the ground but also
-        contribute to the{" "}
-        <strong>overall efficiency and safety of air travel</strong>.
+        contribute to the
+        <strong> overall efficiency and safety of air travel</strong>.
       </p>
     </div>
   );
