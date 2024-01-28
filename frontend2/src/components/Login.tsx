@@ -11,25 +11,28 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./AuthContext"; // Adjust the import path as necessary
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login: React.FC = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [flightNumber, setFlightNumber] = useState<string>("");
   const toast = useToast();
   const navigate = useNavigate();
-  const { login } = useAuth(); // Use the login function from AuthContext
+  const { login } = useAuth();
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (
+    e: React.FormEvent<HTMLDivElement>
+  ): Promise<void> => {
     e.preventDefault();
 
-    // Here you'd replace this with your actual login logic,
-    // such as making an API call to your authentication service
+    // Implement your actual login logic here...
     try {
       // Simulate a login API call
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network request
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       login(); // Update the auth context to reflect that the user is authenticated
+      localStorage.setItem("flightNumber", flightNumber); // Store the flight number in local storage
       navigate("/"); // Redirect to the main page
 
       // Optionally, display a success message
@@ -52,15 +55,13 @@ const Login = () => {
     }
   };
 
-  const [flightNumber, setFlightNumber] = useState("");
-
   return (
     <Flex
       as="form"
       onSubmit={handleLogin}
       direction="column"
-      justifyContent="center"
       alignItems="center"
+      justifyContent="center"
       minHeight="100vh"
     >
       <VStack spacing={8} width="400px">
@@ -68,25 +69,7 @@ const Login = () => {
           Login
         </Heading>
         <Box p={4} borderWidth={1} borderRadius="lg">
-          <Heading size="md" mb={4}>
-            Please sign in
-          </Heading>
-          <FormControl id="email" isRequired>
-            <FormLabel>Email address</FormLabel>
-            <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </FormControl>
-          <FormControl id="password" mt={4} isRequired>
-            <FormLabel>Password</FormLabel>
-            <Input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </FormControl>
+          {/* Email and Password Inputs */}
           <FormControl id="flightNumber" mt={4}>
             <FormLabel>Flight Number</FormLabel>
             <Input
@@ -95,11 +78,8 @@ const Login = () => {
               onChange={(e) => setFlightNumber(e.target.value)}
             />
           </FormControl>
-          <Button type="submit" colorScheme="blue" width="full" mt={4}>
-            Login
-          </Button>
           <Button type="submit" colorScheme="red" width="full" mt={4}>
-            Login with American Airlines
+            Login To Your Flight
           </Button>
         </Box>
       </VStack>

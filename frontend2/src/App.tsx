@@ -14,6 +14,7 @@ import { Box } from "@chakra-ui/react";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./components/AuthContext";
+import FlightCall from "./components/FlightCall";
 const Layout = () => {
   const location = useLocation(); // Hook to get the current location
   const isLoginPage = location.pathname === "/login";
@@ -34,6 +35,7 @@ const Layout = () => {
             path="/diagram"
             element={<PrivateRoute element={AircraftDiagram} />}
           />
+          <Route path="/info" element={<PrivateRoute element={FlightCall} />} />
           {/* Define other private routes as needed */}
         </Routes>
       </Box>

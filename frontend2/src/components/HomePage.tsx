@@ -23,6 +23,7 @@ import { SearchIcon, BellIcon } from "@chakra-ui/icons";
 import logo from "../assets/logolong.png";
 import FlightMap from "./FlightMap";
 import PlacesDisplay from "./PlacesDisplay";
+import FlightCall from "./FlightCall";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
@@ -40,8 +41,8 @@ const HomePage: React.FC = () => {
 
   const [text, setText] = useState("");
   const [polyline, setEncodedPolyline] = useState("");
-  const [fromICAO, setFromICAO] = useState('KIAH');
-  const [toICAO, setToICAO] = useState('EGLL');
+  const [fromICAO, setFromICAO] = useState("KIAH");
+  const [toICAO, setToICAO] = useState("EGLL");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,12 +77,6 @@ const HomePage: React.FC = () => {
   const encodedPolyline = polyline;
   const mapCenter = { lat: 40.714, lng: -74.005 }; // Example: New York City
 
-  useEffect(() => {
-    fetch("http://localhost:3000")
-      .then((response) => response.text())
-      .then((data) => setText(data));
-  }, []);
-
   return (
     <Flex direction="column" h="100vh" mb="800px">
       <Box minH="100vh" py={5}>
@@ -89,25 +84,26 @@ const HomePage: React.FC = () => {
           <Heading>American Companion</Heading>
 
           <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2}>
-            <Box position="relative" width="100%" height="100%">
+            <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Image
                 src="https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg"
                 alt="Flight Quiz Logo"
                 style={{ width: "100%", height: "100%", borderRadius: "5%" }}
               />
-              <Text
+              {/* <Text
                 position="absolute"
-                top="50%"
-                left="50%"
-                transform="translate(-50%, -90%)"
-                color="white"
-                fontSize="xl"
-                fontWeight="bold"
-                textAlign="center"
+                top="0"
+                left="0"
+                width="100%"
+                height="100%"
+                borderRadius="5%"
+                overflow="hidden"
               >
                 Your Journey Just Got Better with Our Inflight Companion.
-              </Text>
+              </Text> */}
             </Box>
+
+            <FlightCall />
 
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Heading size="md" mb={5}>
