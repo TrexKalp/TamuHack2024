@@ -36,7 +36,7 @@ const TopNav = () => {
           icon={<BellIcon />}
           marginRight={"10px"}
         />
-        <Badge ml="4" colorScheme="red">
+        <Badge ml="4" colorScheme="red" fontSize="md">
           {points} Points
         </Badge>
       </Box>

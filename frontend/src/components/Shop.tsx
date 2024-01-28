@@ -20,7 +20,7 @@ const Shop: React.FC = () => {
   useEffect(() => {
     const initialPoints = localStorage.getItem("points") // Get points from localStorage
       ? Number(localStorage.getItem("points")) // Use stored value if it exists
-      : 300; // Default to 500 if no value is stored
+      : 300;
     setPoints(initialPoints);
   }, []);
   const items = [
