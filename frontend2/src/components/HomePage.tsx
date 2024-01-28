@@ -40,13 +40,14 @@ const HomePage: React.FC = () => {
 
   const [text, setText] = useState("");
   const [polyline, setEncodedPolyline] = useState("");
+  const [fromICAO, setFromICAO] = useState('KIAH');
+  const [toICAO, setToICAO] = useState('EGLL');
 
   useEffect(() => {
     const fetchData = async () => {
       const username = "dJnwxZRcvhLLug8rb6KmGssOBlP4c73I6bIlgIT5";
       const password = "";
-      const url =
-        "https://cors-anywhere.herokuapp.com/https://api.flightplandatabase.com/search/plans?fromICAO=KIAH&toName=Kennedy&limit=1";
+      const url = `https://cors-anywhere.herokuapp.com/https://api.flightplandatabase.com/search/plans?fromICAO=${fromICAO}&toIACO=${toICAO}&limit=1`;
 
       const response = await fetch(url, {
         method: "GET",
@@ -70,7 +71,7 @@ const HomePage: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [fromICAO, toICAO]);
 
   const encodedPolyline = polyline;
   const mapCenter = { lat: 40.714, lng: -74.005 }; // Example: New York City
