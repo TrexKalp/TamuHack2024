@@ -2,6 +2,7 @@ import { Box, Flex, IconButton, Spacer, Image, Badge } from "@chakra-ui/react";
 import { SearchIcon, BellIcon } from "@chakra-ui/icons";
 import logo from "../assets/imagesquare.png";
 import { useEffect, useState } from "react";
+import ColorModeSwitcher from "./ColorModeSwitcher";
 
 const TopNav = () => {
   const [points, setPoints] = useState(localStorage.getItem("points") || "0");
@@ -19,6 +20,10 @@ const TopNav = () => {
       <Box>
         <Image boxSize="40px" src={logo} alt="Logo" />
       </Box>
+      <Box ml={3} fontSize="lg" fontWeight="bold" color="white">
+        <ColorModeSwitcher />
+      </Box>
+
       <Spacer />
       <Box>
         <IconButton
@@ -26,7 +31,11 @@ const TopNav = () => {
           icon={<SearchIcon />}
           marginRight={"10px"}
         />
-        <IconButton aria-label="Notifications" icon={<BellIcon />} />
+        <IconButton
+          aria-label="Notifications"
+          icon={<BellIcon />}
+          marginRight={"10px"}
+        />
         <Badge ml="4" colorScheme="red">
           {points} Points
         </Badge>
