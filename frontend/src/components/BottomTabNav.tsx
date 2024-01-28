@@ -27,7 +27,7 @@ const BottomTabNav = () => {
           color="white"
         />
       </Link>
-      <Link to="/landmark-map">
+      <Link to="/diagram">
         <IconButton
           aria-label="Landmark Map"
           icon={<FaMapMarkedAlt />}
