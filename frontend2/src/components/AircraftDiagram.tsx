@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import Engine from "./DiagramInfo/Engine.tsx";
 import InfoText from "./DiagramInfo/InfoText.tsx";
 import LandingGear from "./DiagramInfo/LandingGear.tsx";
@@ -24,7 +24,7 @@ const AircraftDiagram = () => {
   const [elementVisibility, setElementVisibility] = useState({
     infoText: true,
     engine: false,
-    gear: false,
+    element3: false,
   });
 
   const toggleVisibility = (elementId) => {
