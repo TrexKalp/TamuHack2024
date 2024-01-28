@@ -1,6 +1,8 @@
 // QuizPage.tsx
 import React, { useState } from 'react';
-import './QuizPage.css'; // Importing the CSS for styling
+import './QuizPage.css';
+import ImageLoader from "./ImageLoader.tsx"; // Importing the CSS for styling
+import { Center } from '@chakra-ui/react'
 
 interface IAnswer {
   id: string;
@@ -23,17 +25,29 @@ const QuizPage: React.FC = () => {
 
   const questions: IQuestion[] = [
     {
-      question: "First Quiz Question",
+      question: "What is the capital of Texas?",
       answers: [
-        { id: 'a', text: "Answer A" },
-        { id: 'b', text: "Answer B" },
+        { id: 'a', text: "Austin" },
+        { id: 'b', text: "Dallas" },
+        { id: 'c', text: "San Antonio" },
+        { id: 'd', text: "Houston" },
         // More answers...
       ],
       correctAnswer: 'a',
-      explanation: "Explanation for why the correct answer is A.",
-      explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
+      explanation: "Austin is the capital of Texas.",
+      explanationMedia: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/View_of_Downtown_Austin_from_Pfluger_Pedestrian_Bridge_October_2022.jpg/640px-View_of_Downtown_Austin_from_Pfluger_Pedestrian_Bridge_October_2022.jpg" // Replace with actual URL
     },
-    // More questions...
+    {
+      question: "What is the capital of France?",
+      answers: [
+        { id: 'a', text: "Marseille" },
+        { id: 'b', text: "Paris" },
+        // More answers...
+      ],
+      correctAnswer: 'b',
+      explanation: "Paris is the capital of France.",
+      explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
+    }
   ];
 
   const handleAnswerSelect = (answerId: string) => {
@@ -45,6 +59,18 @@ const QuizPage: React.FC = () => {
   const handleSubmit = () => {
     setIsAnswerSubmitted(true);
     setShowExplanation(true);
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setIsAnswerSubmitted(false);
+      setShowExplanation(false);
+      setSelectedAnswer(null);
+    } else {
+      // No more questions, navigate to the home page or show a completion message
+      alert("Quiz completed!"); // Replace with your navigation logic
+    }
   };
 
   return (
@@ -65,11 +91,16 @@ const QuizPage: React.FC = () => {
             <button onClick={handleSubmit}>Submit Answer</button>
         }
         {showExplanation && (
-            <div className="explanation">
-              {selectedAnswer === questions[currentQuestionIndex].correctAnswer
-                  ? <p>Correct! {questions[currentQuestionIndex].explanation}</p>
-                  : <p>Incorrect. {questions[currentQuestionIndex].explanation}</p>}
-              <img src={questions[currentQuestionIndex].explanationMedia} alt="Explanation" />
+            <div>
+              <div className="explanation">
+                {selectedAnswer === questions[currentQuestionIndex].correctAnswer
+                    ? <p>Correct! {questions[currentQuestionIndex].explanation}</p>
+                    : <p>Incorrect. {questions[currentQuestionIndex].explanation}</p>}
+                <Center>
+                  <ImageLoader src={questions[currentQuestionIndex].explanationMedia}/>
+                </Center>
+              </div>
+              <button onClick={handleNextQuestion}>Next Question</button>
             </div>
         )}
       </div>

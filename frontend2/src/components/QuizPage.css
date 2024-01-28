@@ -35,3 +35,11 @@
 .answer.submitted {
     cursor: default; /* Changes the cursor to indicate no action on hover */
 }
+
+.explanation {
+    margin: auto;
+}
+
+.explanationImage {
+    margin: auto;
+}
