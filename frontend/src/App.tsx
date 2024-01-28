@@ -16,6 +16,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./components/AuthContext";
 import FlightCall from "./components/FlightCall";
 import Shop from "./components/Shop";
+import QuizSelection from "./components/QuizSelection.tsx";
 const Layout = () => {
   const location = useLocation(); // Hook to get the current location
   const isLoginPage = location.pathname === "/login";
@@ -32,6 +33,7 @@ const Layout = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<PrivateRoute element={HomePage} />} />
           <Route path="/quiz" element={<PrivateRoute element={QuizPage} />} />
+          <Route path="/quizselection" element={<PrivateRoute element={QuizSelection} />} />
           <Route
             path="/diagram"
             element={<PrivateRoute element={AircraftDiagram} />}
