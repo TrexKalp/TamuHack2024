@@ -21,6 +21,8 @@ const QuizPage: React.FC = () => {
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState<boolean>(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [showExplanation, setShowExplanation] = useState<boolean>(false);
+  const [correctCount, setCorrectCount] = useState<number>(0); // Correct answers count
+  const [incorrectCount, setIncorrectCount] = useState<number>(0); // Incorrect answers count
 
   const questions: IQuestion[] = [
     {
@@ -46,6 +48,50 @@ const QuizPage: React.FC = () => {
       correctAnswer: 'b',
       explanation: "Paris is the capital of France.",
       explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
+    },
+    {
+      question: "What is H?",
+      answers: [
+        { id: 'a', text: "Hydrogen" },
+        { id: 'b', text: "Helium" },
+        // More answers...
+      ],
+      correctAnswer: 'a',
+      explanation: "Explanation",
+      explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
+    },
+    {
+      question: "What is He?",
+      answers: [
+        { id: 'a', text: "Helium" },
+        { id: 'b', text: "Boron" },
+        // More answers...
+      ],
+      correctAnswer: 'a',
+      explanation: "Explanation",
+      explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
+    },
+    {
+      question: "What is F?",
+      answers: [
+        { id: 'a', text: "Fluorine" },
+        { id: 'b', text: "Lithium" },
+        // More answers...
+      ],
+      correctAnswer: 'a',
+      explanation: "Explanation",
+      explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
+    },
+    {
+      question: "What is Au?",
+      answers: [
+        { id: 'a', text: "Gold" },
+        { id: 'b', text: "Mercury" },
+        // More answers...
+      ],
+      correctAnswer: 'a',
+      explanation: "Explanation",
+      explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
     }
   ];
 
@@ -58,6 +104,12 @@ const QuizPage: React.FC = () => {
   const handleSubmit = () => {
     setIsAnswerSubmitted(true);
     setShowExplanation(true);
+    // Update correct and incorrect count
+    if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
+      setCorrectCount(correctCount + 1);
+    } else {
+      setIncorrectCount(incorrectCount + 1);
+    }
   };
 
   const handleNextQuestion = () => {
@@ -68,7 +120,8 @@ const QuizPage: React.FC = () => {
       setSelectedAnswer(null);
     } else {
       // No more questions, navigate to the home page or show a completion message
-      alert("Quiz completed!"); // Replace with your navigation logic
+      alert(`Quiz completed! Correct answers: ${correctCount}, Incorrect answers: ${incorrectCount}`);
+      // Replace the above alert with your navigation logic or API call for backend integration
     }
   };
 
