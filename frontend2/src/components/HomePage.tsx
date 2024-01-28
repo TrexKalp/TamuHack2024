@@ -53,7 +53,6 @@ const HomePage: React.FC = () => {
     <Flex direction="column" h="100vh" mb="800px">
       <Box minH="100vh" py={5}>
         <VStack spacing={4}>
-          <PlacesDisplay />
           <Heading>American Companion</Heading>
 
           <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2}>
@@ -64,23 +63,17 @@ const HomePage: React.FC = () => {
             />
 
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
-              <Heading size="md">Flight Map</Heading>
+              <Heading size="md" mb={5}>
+                Flight Map
+              </Heading>
               <FlightMap
                 encodedPolyline={encodedPolyline}
                 style={{ marginRight: "20px" }}
               />
-              <Heading size="md">Stops Along Your Trip</Heading>
-              <Flex overflowX="scroll" mt={4}>
-                {images.map((image, index) => (
-                  <Box key={index} minWidth="160px" mr={4} _last={{ mr: 0 }}>
-                    <Image
-                      src={image}
-                      alt={`Landmark ${index + 1}`}
-                      borderRadius="md"
-                    />
-                  </Box>
-                ))}
-              </Flex>
+              <Heading size="md" mt={5}>
+                Stops Along Your Trip
+              </Heading>
+              <PlacesDisplay />
               <Button mt={4} colorScheme="blue">
                 Learn More
               </Button>

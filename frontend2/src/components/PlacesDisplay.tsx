@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Box, Image, Text, HStack, VStack } from "@chakra-ui/react";
 
 interface Place {
   displayName: {
@@ -47,15 +48,33 @@ const PlacesDisplay: React.FC = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  const placeholderImageUrl =
+    "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg"; // URL of the placeholder image
+
   return (
-    <div>
-      <h2>Nearby Places</h2>
-      <ul>
+    <VStack spacing={4} align="stretch">
+      <HStack overflowX="auto" spacing={4} p={4}>
         {places.map((place, index) => (
-          <li key={index}>{place.displayName.text}</li> // Displaying the 'text' part of 'displayName'
+          <Box key={index} position="relative" minW="200px">
+            <Image
+              src={placeholderImageUrl}
+              alt={place.displayName.text}
+              borderRadius="md"
+            />
+            <Text
+              position="absolute"
+              bottom="0"
+              width="100%"
+              textAlign="center"
+              bgColor="rgba(0, 0, 0, 0.5)"
+              color="white"
+            >
+              {place.displayName.text}
+            </Text>
+          </Box>
         ))}
-      </ul>
-    </div>
+      </HStack>
+    </VStack>
   );
 };
 
