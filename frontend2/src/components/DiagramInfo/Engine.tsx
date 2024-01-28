@@ -3,7 +3,8 @@ import React from "react";
 const Engine = () => {
   return (
     <div>
-      <h2>Engines</h2>
+      <h2><strong>Engines</strong></h2>
+      <br></br>
       <p>
           Engines make the <strong>tremendous power</strong> needed to propel the aircraft
           through the sky.
@@ -22,7 +23,7 @@ const Engine = () => {
         through the air.
       </p>
       <br></br>
-      <p>
+      <p style={{ marginBottom: "10vh" }}>
         It's like blowing up a balloon and letting it go, but on a much larger
         and more controlled scale.
       </p>

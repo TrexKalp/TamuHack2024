@@ -1,6 +1,7 @@
 import React from "react";
 import Engine from "./DiagramInfo/Engine.tsx";
 import InfoText from "./DiagramInfo/InfoText.tsx";
+import LandingGear from "./DiagramInfo/LandingGear.tsx";
 
 import {
   Box,
@@ -20,32 +21,28 @@ const AircraftDiagram = () => {
     "Click on the highlighted areas to learn about them!"
   );
 
-  const handleClick = (areaId: string) => {
-    // Perform different actions based on the clicked area
-    switch (areaId) {
-      case "area1":
-        console.log("Clicked on Area 1");
-        setInfoText(
-          "Engines make the tremendous power needed to propel the aircraft through the sky.\n" +
-            'The engines "breathe in" massive amounts of air, mix it with fuel, and then ignite it, creating a controlled explosion that releases an incredible amount of energy.\n' +
-            "The powerful explosion inside the engine creates a force that gets pushed out of the back of the engine at an extremely high speed. This force, also known as thrust, is what makes the plane zoom forward through the air.\n" +
-            "It's like blowing up a balloon and letting it go, but on a much larger and more controlled scale."
-        );
-        break;
-      case "area2":
-        console.log("Clicked on Area 2");
-        setInfoText("This is the second area!");
-        break;
-      // Add more cases for other areas as needed
-      default:
-        break;
-    }
+  const [elementVisibility, setElementVisibility] = useState({
+    infoText: true,
+    engine: false,
+    gear: false,
+  });
+
+  const toggleVisibility = (elementId) => {
+    // Create a new object with all elements set to false
+    const newElementVisibility = Object.fromEntries(
+      Object.keys(elementVisibility).map((key) => [key, false])
+    );
+
+    // Toggle the visibility of the clicked element
+    newElementVisibility[elementId] = true;
+
+    // Update the state
+    setElementVisibility(newElementVisibility);
   };
 
   return (
     <Box
       w="100vw"
-      h="100vh"
       bg={bgColor}
       display="flex"
       alignItems="top"
@@ -62,8 +59,8 @@ const AircraftDiagram = () => {
           <div
             style={{
               position: "absolute",
-              top: "30vw",
-              left: "42vw",
+              top: "28vw",
+              left: "40vw",
               width: "15vw",
               height: "15vw",
               backgroundColor: "rgba(106, 106, 107, 0.3)", // Red highlight (adjust color as needed)
@@ -77,18 +74,20 @@ const AircraftDiagram = () => {
             style={{
               position: "absolute",
               top: "35vw",
-              left: "76vw",
+              left: "74vw",
               width: "10vw",
               height: "10vw",
               backgroundColor: "rgba(106, 106, 107, 0.3)", // Blue highlight (adjust color as needed)
               borderRadius: "30%", // To make the highlight circular
             }}
-            /*onClick={() => handleClick("area2")}*/
+            onClick={() => toggleVisibility("gear")}
           ></div>
 
           <Image src="..\src\assets\plane_pic.jpg" />
         </div>
-        <Text fontSize="lg">{infoText}</Text>
+        {elementVisibility.infoText && <InfoText></InfoText>}
+        {elementVisibility.engine && <Engine></Engine>}
+        {elementVisibility.gear && <LandingGear></LandingGear>}
       </VStack>
     </Box>
   );
