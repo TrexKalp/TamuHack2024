@@ -1,6 +1,6 @@
 // QuizPage.tsx
 import React, { useEffect, useState } from "react";
-import { Button, Center, VStack, Text, Flex } from "@chakra-ui/react";
+import { Button, Center, VStack, Text, Flex, Spinner } from "@chakra-ui/react";
 import OpenAI from "openai";
 import { globalTopic } from "./GlobalTopic.tsx";
 
@@ -128,13 +128,20 @@ const QuizPage: React.FC = () => {
 
   // Check if questions are loaded
   if (questions.length === 0) {
-    return <Center>Loading questions...</Center>;
+    return (
+      <Flex direction="column" align="center" justify="center" height="80vh">
+        <VStack spacing={5}>
+          <Text fontSize="2xl">Loading questions...</Text>
+          <Spinner size="xl" color="blue.500" />
+        </VStack>
+      </Flex>
+    );
   }
 
   return (
     <Flex direction="column" align="center" justify="center" height="80vh">
       <VStack spacing={4}>
-        <Text fontSize="2xl" textAlign="center">
+        <Text fontSize="2xl" textAlign="center" mx={5}>
           {questions[currentQuestionIndex].question}
         </Text>
         <VStack>
