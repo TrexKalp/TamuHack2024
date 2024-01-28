@@ -1,8 +1,7 @@
 // QuizPage.tsx
 import React, { useState } from 'react';
-import './QuizPage.css';
 import ImageLoader from "./ImageLoader.tsx"; // Importing the CSS for styling
-import { Center } from '@chakra-ui/react'
+import {Button, Center, VStack, Text} from '@chakra-ui/react'
 
 interface IAnswer {
   id: string;
@@ -22,6 +21,8 @@ const QuizPage: React.FC = () => {
   const [isAnswerSubmitted, setIsAnswerSubmitted] = useState<boolean>(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [showExplanation, setShowExplanation] = useState<boolean>(false);
+  const [correctCount, setCorrectCount] = useState<number>(0); // Correct answers count
+  const [incorrectCount, setIncorrectCount] = useState<number>(0); // Incorrect answers count
 
   const questions: IQuestion[] = [
     {
@@ -47,6 +48,50 @@ const QuizPage: React.FC = () => {
       correctAnswer: 'b',
       explanation: "Paris is the capital of France.",
       explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
+    },
+    {
+      question: "What is H?",
+      answers: [
+        { id: 'a', text: "Hydrogen" },
+        { id: 'b', text: "Helium" },
+        // More answers...
+      ],
+      correctAnswer: 'a',
+      explanation: "Explanation",
+      explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
+    },
+    {
+      question: "What is He?",
+      answers: [
+        { id: 'a', text: "Helium" },
+        { id: 'b', text: "Boron" },
+        // More answers...
+      ],
+      correctAnswer: 'a',
+      explanation: "Explanation",
+      explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
+    },
+    {
+      question: "What is F?",
+      answers: [
+        { id: 'a', text: "Fluorine" },
+        { id: 'b', text: "Lithium" },
+        // More answers...
+      ],
+      correctAnswer: 'a',
+      explanation: "Explanation",
+      explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
+    },
+    {
+      question: "What is Au?",
+      answers: [
+        { id: 'a', text: "Gold" },
+        { id: 'b', text: "Mercury" },
+        // More answers...
+      ],
+      correctAnswer: 'a',
+      explanation: "Explanation",
+      explanationMedia: "https://example.com/image_or_video_url.jpg" // Replace with actual URL
     }
   ];
 
@@ -59,6 +104,12 @@ const QuizPage: React.FC = () => {
   const handleSubmit = () => {
     setIsAnswerSubmitted(true);
     setShowExplanation(true);
+    // Update correct and incorrect count
+    if (selectedAnswer === questions[currentQuestionIndex].correctAnswer) {
+      setCorrectCount(correctCount + 1);
+    } else {
+      setIncorrectCount(incorrectCount + 1);
+    }
   };
 
   const handleNextQuestion = () => {
@@ -69,41 +120,44 @@ const QuizPage: React.FC = () => {
       setSelectedAnswer(null);
     } else {
       // No more questions, navigate to the home page or show a completion message
-      alert("Quiz completed!"); // Replace with your navigation logic
+      alert(`Quiz completed! Correct answers: ${correctCount}, Incorrect answers: ${incorrectCount}`);
+      // Replace the above alert with your navigation logic or API call for backend integration
     }
   };
 
   return (
-      <div className="quiz-container">
-        <h1>{questions[currentQuestionIndex].question}</h1>
-        <div className="answers">
-          {questions[currentQuestionIndex].answers.map((answer: IAnswer) => (
-              <div
-                  key={answer.id}
-                  className={`answer ${selectedAnswer === answer.id ? 'selected' : ''} ${isAnswerSubmitted ? 'submitted' : ''}`}
-                  onClick={() => handleAnswerSelect(answer.id)}
-              >
-                {answer.text}
-              </div>
-          ))}
-        </div>
-        {!isAnswerSubmitted && selectedAnswer &&
-            <button onClick={handleSubmit}>Submit Answer</button>
-        }
-        {showExplanation && (
-            <div>
-              <div className="explanation">
-                {selectedAnswer === questions[currentQuestionIndex].correctAnswer
-                    ? <p>Correct! {questions[currentQuestionIndex].explanation}</p>
-                    : <p>Incorrect. {questions[currentQuestionIndex].explanation}</p>}
-                <Center>
-                  <ImageLoader src={questions[currentQuestionIndex].explanationMedia}/>
-                </Center>
-              </div>
-              <button onClick={handleNextQuestion}>Next Question</button>
-            </div>
-        )}
-      </div>
+      <Center>
+        <VStack spacing={4}>
+          <Text fontSize="2xl">{questions[currentQuestionIndex].question}</Text>
+          <VStack>
+            {questions[currentQuestionIndex].answers.map((answer: IAnswer) => (
+                <Button
+                    key={answer.id}
+                    onClick={() => handleAnswerSelect(answer.id)}
+                    colorScheme="blue"
+                    isDisabled={isAnswerSubmitted}
+                    variant={selectedAnswer === answer.id ? 'solid' : 'outline'}
+                >
+                  {answer.text}
+                </Button>
+            ))}
+          </VStack>
+          {!isAnswerSubmitted && selectedAnswer &&
+              <Button colorScheme="blue" onClick={handleSubmit}>Submit</Button>
+          }
+          {showExplanation && (
+              <VStack>
+                <Text>
+                  {selectedAnswer === questions[currentQuestionIndex].correctAnswer
+                      ? `Correct! ${questions[currentQuestionIndex].explanation}`
+                      : `Incorrect. ${questions[currentQuestionIndex].explanation}`}
+                </Text>
+                <ImageLoader src={questions[currentQuestionIndex].explanationMedia}/>
+                <Button colorScheme="blue" onClick={handleNextQuestion}>Next Question</Button>
+              </VStack>
+          )}
+        </VStack>
+      </Center>
   );
 };
 
