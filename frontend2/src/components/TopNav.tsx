@@ -1,13 +1,12 @@
-import { Box, Flex, IconButton, Spacer } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Spacer, Image } from "@chakra-ui/react";
 import { SearchIcon, BellIcon } from "@chakra-ui/icons";
-
-// Replace these with your actual logo, search, and bell icons
+import logo from "../assets/imagesquare.png";
 
 const TopNav = () => {
   return (
     <Flex align="center" p={4}>
       <Box>
-        <IconButton aria-label="Logo" />
+        <Image boxSize="40px" src={logo} alt="Logo" />
       </Box>
       <Spacer />
       <Box>
