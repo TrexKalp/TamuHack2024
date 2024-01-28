@@ -6,7 +6,7 @@ const Cockpit = () => {
     <div>
       <h2><strong>Cockpit</strong></h2>
       <p>
-        An airplane cockpit is a high-tech control room where the pilot
+        An airplane cockpit is a <strong>high-tech control room</strong> where the pilot
         sits to fly the plane. It's filled with buttons, switches, and screens
         that help the pilot control everything - from altitude to speed.
       </p>
@@ -28,7 +28,7 @@ const Cockpit = () => {
       <br></br>
       <p>
         So, in simple terms, the cockpit is where the magic happens. It's the
-        heart of the airplane, where skilled pilots use advanced tools to make
+        <strong> heart of the airplane</strong>, where skilled pilots use advanced tools to make
         sure everyone has a smooth and safe flight.
       </p>
     </div>
