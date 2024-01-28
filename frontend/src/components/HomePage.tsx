@@ -29,7 +29,7 @@ import Leaderboard from "./Leaderboard";
 import DaeModel from "./DaeModel";
 import landing from "../assets/airlines.png";
 import FlightLeaderboard from "./FlightLeaderboard.tsx";
-import {globalTopic} from "./GlobalTopic.tsx";
+import { globalTopic } from "./GlobalTopic.tsx";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
@@ -45,31 +45,34 @@ const HomePage: React.FC = () => {
   const [polyline, setEncodedPolyline] = useState("");
   useEffect(() => {
     const manageMap = async () => {
-      setLocalFlightNumber(storedFlightNumber ?? "    ");
+      setLocalFlightNumber(storedFlightNumber ?? "");
     };
     manageMap();
   });
 
   useEffect(() => {
     const getData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
-        );
-        const data = await response.json();
+      if (storedFlightNumber) {
+        try {
+          const response = await fetch(
+            `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
+          );
+          const data = await response.json();
 
-        if (data && data.length > 0) {
-          // Set flightData and IATA codes inside the .then block
+          if (data && data.length > 0) {
+            // Set flightData and IATA codes inside the .then block
 
-          setFlightData(data[0]);
-          setFromIATA(data[0].origin.code);
-          setToIATA(data[0].destination.code);
-          globalTopic["landmarkTopic"] = "City that has the airport " + data[0].destination.code;
-        } else {
-          console.error("Flight data not found.");
+            setFlightData(data[0]);
+            setFromIATA(data[0].origin.code);
+            setToIATA(data[0].destination.code);
+            globalTopic["landmarkTopic"] =
+              "City that has the airport " + data[0].destination.code + " . Make questions about the city, not the airport.";
+          } else {
+            console.error("Flight data not found.");
+          }
+        } catch (error) {
+          console.error("Error fetching flight data:", error);
         }
-      } catch (error) {
-        console.error("Error fetching flight data:", error);
       }
     };
 
