@@ -23,7 +23,7 @@ const PlacesDisplay: React.FC = () => {
         "X-Goog-FieldMask": "places.displayName",
       },
       body: JSON.stringify({
-        includedTypes: ["museum"],
+        includedTypes: ["park", "museum"],
         maxResultCount: 10,
         locationRestriction: {
           circle: {
