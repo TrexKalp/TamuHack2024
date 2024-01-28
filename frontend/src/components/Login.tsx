@@ -164,6 +164,19 @@ const Login: React.FC = () => {
           >
             Login
           </Button>
+          <Button
+            type="submit"
+            colorScheme="red"
+            width="full"
+            mt={4}
+            size="lg"
+            boxShadow="md"
+            _hover={{
+              boxShadow: "lg",
+            }}
+          >
+            Register
+          </Button>
         </Box>
       </VStack>
     </Flex>
