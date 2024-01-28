@@ -15,6 +15,7 @@ import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import { AuthProvider } from "./components/AuthContext";
 import FlightCall from "./components/FlightCall";
+import Shop from "./components/Shop";
 const Layout = () => {
   const location = useLocation(); // Hook to get the current location
   const isLoginPage = location.pathname === "/login";
@@ -36,6 +37,7 @@ const Layout = () => {
             element={<PrivateRoute element={AircraftDiagram} />}
           />
           <Route path="/info" element={<PrivateRoute element={FlightCall} />} />
+          <Route path="shop" element={<PrivateRoute element={Shop} />} />
           {/* Define other private routes as needed */}
         </Routes>
       </Box>

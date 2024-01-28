@@ -132,7 +132,7 @@ const PlacesDisplay: React.FC = () => {
 
   return (
     <VStack spacing={5} align="stretch" p={5}>
-      {places.slice(0, 8).map(
+      {places.slice(0, 6).map(
         (place, index) =>
           place.properties.name && (
             <LinkBox

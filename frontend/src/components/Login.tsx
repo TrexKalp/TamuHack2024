@@ -9,9 +9,16 @@ import {
   VStack,
   useToast,
   Flex,
+  useColorModeValue,
+  InputGroup,
+  InputLeftElement,
+  Text,
+  Image,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext"; // Adjust the import path as necessary
+import { FaPlane } from "react-icons/fa";
+import logo from "../assets/imagesquare.png";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -55,6 +62,9 @@ const Login: React.FC = () => {
     }
   };
 
+  const formBackground = useColorModeValue("white", "gray.800");
+  const inputTextColor = useColorModeValue("gray.800", "whiteAlpha.900");
+
   return (
     <Flex
       as="form"
@@ -63,23 +73,56 @@ const Login: React.FC = () => {
       alignItems="center"
       justifyContent="center"
       minHeight="100vh"
+      bgGradient="linear(to-br, red.600, blue.500)"
     >
-      <VStack spacing={8} width="400px">
-        <Heading textAlign="center" size="xl">
-          Login
+      <VStack
+        spacing={6}
+        w={["90%", "400px"]}
+        p={8}
+        bg={formBackground}
+        borderRadius="xl"
+        boxShadow="2xl"
+      >
+        <Heading size="xl" textAlign="center">
+          American Airlines Flight Login
         </Heading>
-        <Box p={4} borderWidth={1} borderRadius="lg">
-          {/* Email and Password Inputs */}
-          <FormControl id="flightNumber" mt={4}>
+        <Image src={logo} alt="Flight Quiz Logo" />
+        <Text fontSize="lg" color={useColorModeValue("gray.600", "gray.200")}>
+          Enter your flight number to proceed
+        </Text>
+        <Box w="full">
+          <FormControl id="flightNumber">
             <FormLabel>Flight Number</FormLabel>
-            <Input
-              type="text"
-              value={flightNumber}
-              onChange={(e) => setFlightNumber(e.target.value)}
-            />
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<FaPlane color="gray.300" />}
+              />
+              <Input
+                type="text"
+                value={flightNumber}
+                onChange={(e) => setFlightNumber(e.target.value)}
+                color={inputTextColor}
+                borderColor={useColorModeValue("gray.300", "gray.600")}
+                _hover={{
+                  borderColor: useColorModeValue("gray.400", "whiteAlpha.800"),
+                }}
+                _placeholder={{ color: "gray.500" }}
+              />
+            </InputGroup>
           </FormControl>
-          <Button type="submit" colorScheme="red" width="full" mt={4}>
-            Login To Your Flight
+          <Button
+            type="submit"
+            colorScheme="blue"
+            width="full"
+            mt={4}
+            size="lg"
+            boxShadow="md"
+            _hover={{
+              boxShadow: "lg",
+            }}
+          >
+            Login
           </Button>
         </Box>
       </VStack>

@@ -1,11 +1,12 @@
 import React from "react";
-import { Flex, IconButton } from "@chakra-ui/react";
+import { Flex, IconButton, Box } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import {
   FaTrophy,
   FaMapMarkedAlt,
   FaPlane,
   FaQuestionCircle,
+  FaHome,
 } from "react-icons/fa";
 
 const BottomTabNav = () => {
@@ -17,17 +18,17 @@ const BottomTabNav = () => {
       width="100%"
       pb={2}
       pt={4}
-      bg="blue.500"
+      bgGradient="linear(to-r, blue.300, blue.400)"
     >
-      <Link to="/leaderboard">
+      <Link to="/">
         <IconButton
           aria-label="Leaderboard"
-          icon={<FaTrophy />}
+          icon={<FaHome />}
           variant="ghost"
           color="white"
         />
       </Link>
-      <Link to="/diagram">
+      <Link to="/shop">
         <IconButton
           aria-label="Landmark Map"
           icon={<FaMapMarkedAlt />}
@@ -35,7 +36,7 @@ const BottomTabNav = () => {
           color="white"
         />
       </Link>
-      <Link to="/aircraft-trivia">
+      <Link to="/diagram">
         <IconButton
           aria-label="Aircraft Trivia"
           icon={<FaPlane />}
