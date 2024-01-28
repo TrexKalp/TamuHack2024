@@ -66,7 +66,9 @@ const HomePage: React.FC = () => {
             setFromIATA(data[0].origin.code);
             setToIATA(data[0].destination.code);
             globalTopic["landmarkTopic"] =
-              "City that has the airport " + data[0].destination.code + " . Make questions about the city, not the airport.";
+              "City that has the airport " +
+              data[0].destination.code +
+              " . Make questions about the city, not the airport.";
           } else {
             console.error("Flight data not found.");
           }
@@ -154,6 +156,7 @@ const HomePage: React.FC = () => {
       <Box minH="100vh" py={5}>
         <VStack spacing={4}>
           <Heading>Welcome To Airbud!</Heading>
+          <Text mt={-4}>Your personal in-flight companion.</Text>
 
           <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2} mb={10}>
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
