@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Button,
@@ -13,25 +13,16 @@ const AircraftDiagram = () => {
   const bgColor = useColorModeValue("gray.100", "gray.700"); // Responsive background color for light/dark mode
   const textColor = useColorModeValue("gray.800", "gray.100"); // Responsive text color for light/dark mode
 
-  const [infoText, setInfoText] = useState(
-    "Click on the highlighted areas to learn about them!"
-  );
-
   const handleClick = (areaId: string) => {
     // Perform different actions based on the clicked area
     switch (areaId) {
       case "area1":
         console.log("Clicked on Area 1");
-        setInfoText(
-          "Engines make the tremendous power needed to propel the aircraft through the sky.\n" +
-            "The engines \"breathe in\" massive amounts of air, mix it with fuel, and then ignite it, creating a controlled explosion that releases an incredible amount of energy.\n" +
-            "The powerful explosion inside the engine creates a force that gets pushed out of the back of the engine at an extremely high speed. This force, also known as thrust, is what makes the plane zoom forward through the air.\n" +
-            "It's like blowing up a balloon and letting it go, but on a much larger and more controlled scale."
-        );
+        // Add your logic for Area 1
         break;
       case "area2":
         console.log("Clicked on Area 2");
-        setInfoText("This is the second area!");
+        // Add your logic for Area 2
         break;
       // Add more cases for other areas as needed
       default:
@@ -55,6 +46,7 @@ const AircraftDiagram = () => {
           how it was made and more.
         </Text>
         <div style={{ position: "relative" }}>
+          {/* Highlight Area 1 */}
           <div
             style={{
               position: "absolute",
@@ -67,6 +59,8 @@ const AircraftDiagram = () => {
             }}
             onClick={() => handleClick("area1")}
           ></div>
+
+          {/* Highlight Area 2 */}
           <div
             style={{
               position: "absolute",
@@ -82,7 +76,6 @@ const AircraftDiagram = () => {
 
           <Image src="..\src\assets\plane_pic.jpg" />
         </div>
-        <Text fontSize="lg">{infoText}</Text>
       </VStack>
     </Box>
   );

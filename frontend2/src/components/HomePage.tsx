@@ -20,6 +20,7 @@ import {
 import { Link } from "react-router-dom";
 import { SearchIcon, BellIcon } from "@chakra-ui/icons";
 import logo from "../assets/logolong.png";
+import FlightMap from "./FlightMap";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
@@ -36,6 +37,12 @@ const HomePage: React.FC = () => {
   ];
 
   const [text, setText] = useState("");
+
+  const polyline = [
+    { lat: 40.748817, lng: -73.985428 }, // New York
+    { lat: 40.712776, lng: -74.005974 }, // Lower Manhattan
+    // Add more coordinates as needed
+  ];
 
   useEffect(() => {
     fetch("http://localhost:3000")
@@ -57,6 +64,8 @@ const HomePage: React.FC = () => {
             />
 
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
+              <Heading size="md">Flight Map</Heading>
+              <FlightMap polyline={polyline} />
               <Heading size="md">Stops Along Your Trip</Heading>
               <Flex overflowX="scroll" mt={4}>
                 {images.map((image, index) => (
