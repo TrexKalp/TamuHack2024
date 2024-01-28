@@ -38,11 +38,9 @@ const HomePage: React.FC = () => {
 
   const [text, setText] = useState("");
 
-  const polyline = [
-    { lat: 40.748817, lng: -73.985428 }, // New York
-    { lat: 40.712776, lng: -74.005974 }, // Lower Manhattan
-    // Add more coordinates as needed
-  ];
+  const encodedPolyline =
+    "slg~Haoa\\sipC`khOoha@ptdH{wJxelBotLrieCkcDvts@gaAdpTshBrya@we@lzKorCzdq@g{Cfyt@gcE~heAs~UlfbHchAl_v@ce@jv\\sq@hth@o_@trZwrAbsjAs{@rb{@o}@z{cAvgb@ls|Cvpy@zlgErfRz}~@fa_@tygBkiKbv{C?~hbE?~hbE?~hbE?~hbE?~hbE?~hbE_ibE~po]_ibE~b`|@?~b`|@~hbE~b`|@~nwHbirb@vzaj@bgtgAsnNrqzAr{|@vyfA~|q@ziy@brx@nsaAb{|BnqmCjb|AzoaCbyuFztyKzfhHzanE";
+  const mapCenter = { lat: 40.714, lng: -74.005 }; // Example: New York City
 
   useEffect(() => {
     fetch("http://localhost:3000")
@@ -65,7 +63,10 @@ const HomePage: React.FC = () => {
 
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Heading size="md">Flight Map</Heading>
-              <FlightMap polyline={polyline} />
+              <FlightMap
+                encodedPolyline={encodedPolyline}
+                mapCenter={mapCenter}
+              />
               <Heading size="md">Stops Along Your Trip</Heading>
               <Flex overflowX="scroll" mt={4}>
                 {images.map((image, index) => (
