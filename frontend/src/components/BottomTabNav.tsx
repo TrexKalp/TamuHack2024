@@ -29,10 +29,10 @@ const BottomTabNav = () => {
           color="white"
         />
       </Link>
-      <Link to="/shop">
+      <Link to="/quizselection">
         <IconButton
-          aria-label="Landmark Map"
-          icon={<FaShoppingBag />}
+          aria-label="Quiz"
+          icon={<FaQuestionCircle />}
           variant="ghost"
           color="white"
         />
@@ -45,10 +45,10 @@ const BottomTabNav = () => {
           color="white"
         />
       </Link>
-      <Link to="/quizselection">
+      <Link to="/shop">
         <IconButton
-          aria-label="Quiz"
-          icon={<FaQuestionCircle />}
+          aria-label="Landmark Map"
+          icon={<FaShoppingBag />}
           variant="ghost"
           color="white"
         />

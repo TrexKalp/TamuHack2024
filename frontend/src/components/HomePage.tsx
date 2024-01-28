@@ -185,7 +185,7 @@ const HomePage: React.FC = () => {
               />
 
               <Heading size="md" mt={8}>
-                Leaderboard
+                Flight Leaderboard
               </Heading>
               <FlightLeaderboard />
 
