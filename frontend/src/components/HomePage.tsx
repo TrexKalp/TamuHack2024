@@ -192,7 +192,7 @@ const HomePage: React.FC = () => {
               </Heading>
 
               <Heading size="md" mt={5}>
-                Stops Along Your Trip
+                Landmarks Along Your Trip
               </Heading>
               <PlacesDisplay />
               <Button mt={4} colorScheme="blue">

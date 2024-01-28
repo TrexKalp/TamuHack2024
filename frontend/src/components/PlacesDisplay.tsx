@@ -92,7 +92,7 @@ const PlacesDisplay: React.FC = () => {
               radius: "8000",
               lon: point.lng.toString(),
               lat: point.lat.toString(),
-              kinds: "museums,architecture",
+              kinds: "historical_places",
               limit: "10",
             },
             headers: {
