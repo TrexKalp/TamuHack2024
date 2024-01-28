@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Engine from "./DiagramInfo/Engine.tsx";
 import InfoText from "./DiagramInfo/InfoText.tsx";
 import LandingGear from "./DiagramInfo/LandingGear.tsx";
+import Wing from "./DiagramInfo/Wing.tsx";
+import Cockpit from "./DiagramInfo/Cockpit.tsx";
 
 import {
   Box,
@@ -24,7 +26,9 @@ const AircraftDiagram = () => {
   const [elementVisibility, setElementVisibility] = useState({
     infoText: true,
     engine: false,
-    element3: false,
+    gear: false,
+    wing: false,
+    cockpit: false,
   });
 
   const toggleVisibility = (elementId) => {
@@ -51,8 +55,7 @@ const AircraftDiagram = () => {
       <VStack spacing={8} p={5} align="center">
         <Heading color={textColor}>All About Your Plane!</Heading>
         <Text fontSize="lg" color={textColor}>
-          Discover everything about the plane you're flying in. From history to
-          how it was made and more.
+          Discover everything about the plane you're flying in.
         </Text>
         <div style={{ position: "relative" }}>
           {/* Highlight Area 1 */}
@@ -83,11 +86,39 @@ const AircraftDiagram = () => {
             onClick={() => toggleVisibility("gear")}
           ></div>
 
+          <div
+            style={{
+              position: "absolute",
+              top: "22vw",
+              left: "9vw",
+              width: "30vw",
+              height: "15vw",
+              backgroundColor: "rgba(106, 106, 107, 0.3)", // Blue highlight (adjust color as needed)
+              borderRadius: "30%", // To make the highlight circular
+            }}
+            onClick={() => toggleVisibility("wing")}
+          ></div>
+
+          <div
+            style={{
+              position: "absolute",
+              top: "20vw",
+              left: "75vw",
+              width: "13vw",
+              height: "13vw",
+              backgroundColor: "rgba(106, 106, 107, 0.3)", // Blue highlight (adjust color as needed)
+              borderRadius: "30%", // To make the highlight circular
+            }}
+            onClick={() => toggleVisibility("cockpit")}
+          ></div>
+
           <Image src="..\src\assets\plane_pic.jpg" />
         </div>
         {elementVisibility.infoText && <InfoText></InfoText>}
         {elementVisibility.engine && <Engine></Engine>}
         {elementVisibility.gear && <LandingGear></LandingGear>}
+        {elementVisibility.wing && <Wing></Wing>}
+        {elementVisibility.cockpit && <Cockpit></Cockpit>}
       </VStack>
     </Box>
   );
