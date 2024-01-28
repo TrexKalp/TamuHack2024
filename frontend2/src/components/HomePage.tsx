@@ -41,8 +41,8 @@ const HomePage: React.FC = () => {
 
   const [localFlightNumber, setLocalFlightNumber] = useState<string>("");
   const [flightData, setFlightData] = useState<any | null>(null);
-  const [fromIATA, setFromIATA] = useState(flightData.origin.code);
-  const [toIATA, setToIATA] = useState(flightData.destination.code);
+  const [fromIATA, setFromIATA] = useState("IAH");
+  const [toIATA, setToIATA] = useState("LHR");
 
   useEffect(() => {
     if (localFlightNumber) {
@@ -57,8 +57,8 @@ const HomePage: React.FC = () => {
     }
   }, [localFlightNumber]);
 
-  const [fromICAO, setFromICAO] = useState(flightData.origin.code);
-  const [toICAO, setToICAO] = useState(flightData.destination.code);
+  const [fromICAO, setFromICAO] = useState("");
+  const [toICAO, setToICAO] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,8 +88,8 @@ const HomePage: React.FC = () => {
         },
       });
 
-      if (response.ok) {
-        const result = await response.json();
+      if (response2.ok) {
+        const result = await response2.json();
         if (result.length > 0 && result[0].icao) {
           setToICAO(result[0].icao);
         }
