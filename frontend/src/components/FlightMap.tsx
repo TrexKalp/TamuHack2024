@@ -51,8 +51,10 @@ const FlightMap = ({ encodedPolyline }) => {
     setPath(decodedPath);
   }, [encodedPolyline]);
 
+  const apiKey = import.meta.env.VITE_APP_API_GMAPS;
+
   return (
-    <LoadScript googleMapsApiKey="AIzaSyALs4j7Aw0B1OVAnxV2r9PQ-0WtIp1B9lI">
+    <LoadScript googleMapsApiKey={apiKey}>
       <div style={containerStyle}>
         <GoogleMap
           mapContainerStyle={{ width: "400px", height: "400px" }}

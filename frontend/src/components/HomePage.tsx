@@ -88,7 +88,7 @@ const HomePage: React.FC = () => {
           `https://api.api-ninjas.com/v1/airports?iata=${fromIATA}`,
           {
             headers: {
-              "X-Api-key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
+              "X-Api-key": import.meta.env.VITE_APP_API_NINJA,
             },
           }
         );

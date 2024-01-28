@@ -96,8 +96,7 @@ const PlacesDisplay: React.FC = () => {
               limit: "10",
             },
             headers: {
-              "X-RapidAPI-Key":
-                "710e73b16cmsh6805e995b5ca6b3p1a6384jsn459fe4a45b61",
+              "X-RapidAPI-Key": import.meta.env.VITE_APP_API_XAPI,
               "X-RapidAPI-Host": "opentripmap-places-v1.p.rapidapi.com",
             },
           };
