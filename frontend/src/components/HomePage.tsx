@@ -149,7 +149,7 @@ const HomePage: React.FC = () => {
         <VStack spacing={4}>
           <Heading>American Companion</Heading>
 
-          <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2}>
+          <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2} mb={10}>
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Image
                 src={landing}
@@ -190,16 +190,13 @@ const HomePage: React.FC = () => {
               </Heading>
               <PlacesDisplay />
             </Box>
-
-            {/* Aircraft Trivia Section */}
+            {/* 
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Heading size="md">Aircraft Trivia</Heading>
-              <Text mt={2}>Did you know?</Text>
-              {/* Placeholder for trivia content */}
-            </Box>
+              <Text mt={2}>Did you know?</Text>]
+            </Box> */}
 
-            {/* Quiz Section */}
-            <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
+            {/* <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Heading size="md">Quiz</Heading>
               <Text mt={2}>Test your knowledge</Text>
 
@@ -208,10 +205,9 @@ const HomePage: React.FC = () => {
                   Start Quiz
                 </Button>
               </Link>
-            </Box>
+            </Box> */}
 
-            {/* Diagram Section */}
-            <Box
+            {/* <Box
               bg={cardBgColor}
               p={4}
               borderRadius="lg"
@@ -225,7 +221,7 @@ const HomePage: React.FC = () => {
                   Learn
                 </Button>
               </Link>
-            </Box>
+            </Box> */}
           </SimpleGrid>
         </VStack>
       </Box>
