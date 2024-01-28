@@ -8,6 +8,7 @@ import {
   Heading,
   VStack,
   useToast,
+  Flex,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
@@ -51,43 +52,58 @@ const Login = () => {
     }
   };
 
+  const [flightNumber, setFlightNumber] = useState("");
+
   return (
-    <VStack
+    <Flex
       as="form"
       onSubmit={handleLogin}
-      spacing={8}
-      width="400px"
-      margin="auto"
-      mt={10}
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="100vh"
     >
-      <Heading textAlign="center" size="xl">
-        Login
-      </Heading>
-      <Box p={4} borderWidth={1} borderRadius="lg">
-        <Heading size="md" mb={4}>
-          Please sign in
-        </Heading>
-        <FormControl id="email" isRequired>
-          <FormLabel>Email address</FormLabel>
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormControl>
-        <FormControl id="password" mt={4} isRequired>
-          <FormLabel>Password</FormLabel>
-          <Input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormControl>
-        <Button type="submit" colorScheme="blue" width="full" mt={4}>
+      <VStack spacing={8} width="400px">
+        <Heading textAlign="center" size="xl">
           Login
-        </Button>
-      </Box>
-    </VStack>
+        </Heading>
+        <Box p={4} borderWidth={1} borderRadius="lg">
+          <Heading size="md" mb={4}>
+            Please sign in
+          </Heading>
+          <FormControl id="email" isRequired>
+            <FormLabel>Email address</FormLabel>
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormControl>
+          <FormControl id="password" mt={4} isRequired>
+            <FormLabel>Password</FormLabel>
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormControl>
+          <FormControl id="flightNumber" mt={4}>
+            <FormLabel>Flight Number</FormLabel>
+            <Input
+              type="text"
+              value={flightNumber}
+              onChange={(e) => setFlightNumber(e.target.value)}
+            />
+          </FormControl>
+          <Button type="submit" colorScheme="blue" width="full" mt={4}>
+            Login
+          </Button>
+          <Button type="submit" colorScheme="red" width="full" mt={4}>
+            Login with American Airlines
+          </Button>
+        </Box>
+      </VStack>
+    </Flex>
   );
 };
 
