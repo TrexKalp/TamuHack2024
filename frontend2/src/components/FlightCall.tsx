@@ -60,7 +60,7 @@ const FlightCall: React.FC = () => {
           </Badge>
           <Divider mb={4} />
           <StatGroup>
-            <Stat bg={statBg} p={3} borderRadius="lg" shadow="md">
+            <Stat bg={statBg} p={3} borderRadius="lg" shadow="md" mr={2}>
               <Flex alignItems="center">
                 <Icon
                   as={FaPlaneDeparture}
@@ -79,7 +79,7 @@ const FlightCall: React.FC = () => {
               </StatHelpText>
             </Stat>
 
-            <Stat bg={statBg} p={3} borderRadius="lg" shadow="md">
+            <Stat bg={statBg} p={3} borderRadius="lg" shadow="md" ml={2}>
               <Flex alignItems="center">
                 <Icon as={FaPlaneArrival} w={6} h={6} mr={2} color="red.500" />
                 <StatLabel>Destination</StatLabel>
