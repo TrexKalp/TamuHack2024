@@ -46,6 +46,45 @@ app.post("/api/searchNearby", async (req, res) => {
   }
 });
 
+app.post('/api/flightNum', async (req, res) => {
+  try {
+    const { iata } = req.body;
+    const url = `https://api.api-ninjas.com/v1/airports?iata=${iata}`;
+
+    const response = await axios.get(url, {
+      headers: {
+        'X-Api-Key': 'nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z',
+      },
+    });
+
+    res.json(response.data);
+  } catch (error) {
+    console.error(`Error: ${error.response ? error.response.status : 'Unknown'}`);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/api/getPath', async (req, res) => {
+  try {
+      // Make API call to external service
+      const username = "dJnwxZRcvhLLug8rb6KmGssOBlP4c73I6bIlgIT5";
+      const password = "";
+      const url = 'https://cors-anywhere.herokuapp.com/https://api.flightplandatabase.com/search/plans';
+
+      const response3 = await axios.get(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+        },
+      });
+
+      res.json(apiResponse.data);
+  } catch (error) {
+      console.error(`Error: ${error.response.status}`);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import {
   Box,
@@ -36,30 +37,45 @@ const HomePage: React.FC = () => {
 
   const [localFlightNumber, setLocalFlightNumber] = useState<string>("");
   const [flightData, setFlightData] = useState<any | null>(null);
-  const [fromIATA, setFromIATA] = useState("DFW");
-  const [toIATA, setToIATA] = useState("PHL");
+  const [fromIATA, setFromIATA] = useState<string>("");
+  const [toIATA, setToIATA] = useState<string>("");
   const storedFlightNumber = localStorage.getItem("flightNumber");
+  const [fromICAO, setFromICAO] = useState("");
+  const [toICAO, setToICAO] = useState("");
+  const [polyline, setEncodedPolyline] = useState("");
+
+  const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
   useEffect(() => {
-    const changeNum = () => {
-      if (storedFlightNumber) {
-        setLocalFlightNumber(storedFlightNumber);
-      } else {
-        setLocalFlightNumber("0234");
+    const manageMap = async () => {
+      setLocalFlightNumber(storedFlightNumber ?? "0123");
+    };
+    manageMap();
+  });
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
+        );
+        const data = await response.json();
+
+        if (data && data.length > 0) {
+          // Set flightData and IATA codes inside the .then block
+
+          setFlightData(data[0]);
+          setFromIATA(data[0].origin.code);
+          setToIATA(data[0].destination.code);
+        } else {
+          console.error("Flight data not found.");
+        }
+      } catch (error) {
+        console.error("Error fetching flight data:", error);
       }
     };
-    changeNum();
-  }, [storedFlightNumber]);
 
-  useEffect(() => {
-    if (localFlightNumber) {
-      fetch(
-        `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
-      )
-        .then((response) => response.json())
-        .then((data) => setFlightData(data[0]))
-        .catch((error) => console.error("Error fetching flight data:", error));
-    }
+    getData();
   }, [localFlightNumber]);
 
   useEffect(() => {
@@ -74,81 +90,55 @@ const HomePage: React.FC = () => {
     }
   }, [flightData]);
 
-  const [fromICAO, setFromICAO] = useState("");
-  const [toICAO, setToICAO] = useState("");
-
   useEffect(() => {
     const fetchData = async () => {
-      if (fromIATA && toIATA) {
-        const url = `https://api.api-ninjas.com/v1/airports?iata=${fromIATA}`;
+      try {
+        const response = await axios.get(
+          `https://api.api-ninjas.com/v1/airports?iata=${fromIATA}&X-Api-key=nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z`
+        );
 
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            "X-Api-Key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
-          },
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          if (result.length > 0 && result[0].icao) {
-            setFromICAO(result[0].icao);
-          }
-        }
-
-        const url2 = `https://api.api-ninjas.com/v1/airports?iata=${toIATA}`;
-        const response2 = await fetch(url2, {
-          method: "GET",
-          headers: {
-            "X-Api-Key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
-          },
-        });
-
-        if (response2.ok) {
-          const result2 = await response2.json();
-          if (result2.length > 0 && result2[0].icao) {
-            setToICAO(result2[0].icao);
-          }
-        }
+        setFromICAO(response.data[0].icao);
+      } catch (error) {
+        console.error("Error fetching data for fromIATA:", error);
       }
     };
 
     fetchData();
-  }, [fromIATA, toIATA]);
-
-  const [text, setText] = useState("");
-  const [polyline, setEncodedPolyline] = useState("");
+  }, [fromIATA]);
 
   useEffect(() => {
-    const fetchICAO = async () => {
-      const username = "dJnwxZRcvhLLug8rb6KmGssOBlP4c73I6bIlgIT5";
-      const password = "";
-      const url = `https://cors-anywhere.herokuapp.com/https://api.flightplandatabase.com/search/plans?fromICAO=${fromICAO}&toICAO=${toICAO}&limit=1`;
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.api-ninjas.com/v1/airports?iata=${toIATA}&X-Api-key=nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z`
+        );
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
-        },
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        // Check if encodedPolyline is present in the response
-        if (result.length > 0 && result[0].encodedPolyline) {
-          // Update the state with the encodedPolyline
-          setEncodedPolyline(result[0].encodedPolyline);
-          localStorage.setItem("encodedPolyline", result[0].encodedPolyline);
-        } else {
-          console.error("encodedPolyline not found in the API response");
-        }
-      } else {
-        console.error("Failed to fetch data");
+        setToICAO(response.data[0].icao);
+      } catch (error) {
+        console.error("Error fetching data for toIATA:", error);
       }
     };
 
-    fetchICAO();
-  }, [fromICAO, toICAO]);
+    fetchData();
+  }, [toIATA]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://cors-anywhere.herokuapp.com/https://api.flightplandatabase.com/search/plans?fromICAO=${fromICAO}&toICAO=${toICAO}&limit=1`
+        );
+
+        setEncodedPolyline(response.data[0].encodedPolyline);
+        localStorage.setItem(
+          "encodedPolyline",
+          response.data[0].encodedPolyline
+        );
+      } catch (error) {}
+    };
+
+    fetchData();
+  }, [fromICAO, toICAO]); // Run once on component mount
 
   const encodedPolyline = polyline;
   const mapCenter = { lat: 40.714, lng: -74.005 }; // Example: New York City
