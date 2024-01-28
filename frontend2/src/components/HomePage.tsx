@@ -41,8 +41,17 @@ const HomePage: React.FC = () => {
 
   const [localFlightNumber, setLocalFlightNumber] = useState<string>("");
   const [flightData, setFlightData] = useState<any | null>(null);
-  const [fromIATA, setFromIATA] = useState("IAH");
-  const [toIATA, setToIATA] = useState("LHR");
+  const [fromIATA, setFromIATA] = useState("DFW");
+  const [toIATA, setToIATA] = useState("PHL");
+
+  useEffect(() => {
+    const storedFlightNumber = localStorage.getItem("flightNumber");
+    if (storedFlightNumber) {
+      setLocalFlightNumber(storedFlightNumber);
+    } else {
+      setLocalFlightNumber("0234");
+    }
+  }, []);
 
   useEffect(() => {
     if (localFlightNumber) {
@@ -52,8 +61,13 @@ const HomePage: React.FC = () => {
         .then((response) => response.json())
         .then((data) => setFlightData(data[0]))
         .catch((error) => console.error("Error fetching flight data:", error));
+    }
+    if (flightData) {
       setFromIATA(flightData.origin.code);
       setToIATA(flightData.destination.code);
+    } else {
+      setFromIATA("DFW");
+      setToIATA("PHL");
     }
   }, [localFlightNumber]);
 
@@ -62,36 +76,36 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const username = "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z";
-      const password = "";
-      const url = `https://api.api-ninjas.com/v1/airports?iata=${fromIATA}`;
+      if (fromIATA && toIATA) {
+        const url = `https://api.api-ninjas.com/v1/airports?iata=${fromIATA}`;
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "X-Api-Key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
-        },
-      });
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "X-Api-Key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
+          },
+        });
 
-      if (response.ok) {
-        const result = await response.json();
-        if (result.length > 0 && result[0].icao) {
-          setFromICAO(result[0].icao);
+        if (response.ok) {
+          const result = await response.json();
+          if (result.length > 0 && result[0].icao) {
+            setFromICAO(result[0].icao);
+          }
         }
-      }
 
-      const url2 = `https://api.api-ninjas.com/v1/airports?iata=${toIATA}`;
-      const response2 = await fetch(url2, {
-        method: "GET",
-        headers: {
-          "X-Api-Key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
-        },
-      });
+        const url2 = `https://api.api-ninjas.com/v1/airports?iata=${toIATA}`;
+        const response2 = await fetch(url2, {
+          method: "GET",
+          headers: {
+            "X-Api-Key": "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z",
+          },
+        });
 
-      if (response2.ok) {
-        const result = await response2.json();
-        if (result.length > 0 && result[0].icao) {
-          setToICAO(result[0].icao);
+        if (response2.ok) {
+          const result2 = await response2.json();
+          if (result2.length > 0 && result2[0].icao) {
+            setToICAO(result2[0].icao);
+          }
         }
       }
     };
