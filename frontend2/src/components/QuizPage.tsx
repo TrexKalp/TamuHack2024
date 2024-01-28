@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import ImageLoader from "./ImageLoader.tsx"; // Importing the CSS for styling
 import { Button, Center, VStack, Text } from "@chakra-ui/react";
-// import OpenAI from "openai";
+import OpenAI from "openai";
 
 interface IAnswer {
   id: string;
