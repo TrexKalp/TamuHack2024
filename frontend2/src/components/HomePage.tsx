@@ -89,11 +89,25 @@ const HomePage: React.FC = () => {
           <Heading>American Companion</Heading>
 
           <SimpleGrid columns={1} spacing={4} w="full" maxW="md" px={2}>
-            <Image
-              src="https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg"
-              alt="Flight Quiz Logo"
-              style={{ width: "100%", height: "100%", borderRadius: "5%" }}
-            />
+            <Box position="relative" width="100%" height="100%">
+              <Image
+                src="https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg"
+                alt="Flight Quiz Logo"
+                style={{ width: "100%", height: "100%", borderRadius: "5%" }}
+              />
+              <Text
+                position="absolute"
+                top="50%"
+                left="50%"
+                transform="translate(-50%, -90%)"
+                color="white"
+                fontSize="xl"
+                fontWeight="bold"
+                textAlign="center"
+              >
+                Your Journey Just Got Better with Our Inflight Companion.
+              </Text>
+            </Box>
 
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
               <Heading size="md" mb={5}>

@@ -19,7 +19,7 @@ const BottomTabNav = () => {
       pt={4}
       bg="blue.500"
     >
-      <Link to="/">
+      <Link to="/leaderboard">
         <IconButton
           aria-label="Leaderboard"
           icon={<FaTrophy />}
