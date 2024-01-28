@@ -39,10 +39,68 @@ const HomePage: React.FC = () => {
     "https://travelprnews.com/wp-content/uploads/2021/11/https___specials-images.forbesimg.com_imageserve_920377840_0x0.jpg",
   ];
 
+  const [localFlightNumber, setLocalFlightNumber] = useState<string>("");
+  const [flightData, setFlightData] = useState<any | null>(null);
+  const [fromIATA, setFromIATA] = useState(flightData.origin.code);
+  const [toIATA, setToIATA] = useState(flightData.destination.code);
+
+  useEffect(() => {
+    if (localFlightNumber) {
+      fetch(
+        `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
+      )
+        .then((response) => response.json())
+        .then((data) => setFlightData(data[0]))
+        .catch((error) => console.error("Error fetching flight data:", error));
+      setFromIATA(flightData.origin.code);
+      setToIATA(flightData.destination.code);
+    }
+  }, [localFlightNumber]);
+
+  const [fromICAO, setFromICAO] = useState(flightData.origin.code);
+  const [toICAO, setToICAO] = useState(flightData.destination.code);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const username = "nwvktBCjZEcFYDbXMOUo0w==OVLL6rKIDNbcL47Z";
+      const password = "";
+      const url = `https://api.api-ninjas.com/v1/airports?iata=${fromIATA}`;
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+        },
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.length > 0 && result[0].icao) {
+          setFromICAO(result[0].icao);
+        }
+      }
+
+      const url2 = `https://api.api-ninjas.com/v1/airports?iata=${toIATA}`;
+      const response2 = await fetch(url2, {
+        method: "GET",
+        headers: {
+          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+        },
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.length > 0 && result[0].icao) {
+          setToICAO(result[0].icao);
+        }
+      }
+    };
+
+    fetchData();
+  }, [fromIATA, toIATA]);
+
   const [text, setText] = useState("");
   const [polyline, setEncodedPolyline] = useState("");
-  const [fromICAO, setFromICAO] = useState("KIAH");
-  const [toICAO, setToICAO] = useState("EGLL");
 
   useEffect(() => {
     const fetchData = async () => {
