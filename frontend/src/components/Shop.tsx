@@ -56,9 +56,12 @@ const Shop: React.FC = () => {
 
           <Box p="6">
             <Box d="flex" alignItems="baseline">
-              <Badge borderRadius="full" px="2" colorScheme="teal">
+              {item.name !== "American Companion" && <Badge borderRadius="full" px="2" colorScheme="teal">
                 New
-              </Badge>
+              </Badge>}
+              {item.name === "American Companion" && <Badge borderRadius="full" px="2" colorScheme="orange">
+                Best Seller
+              </Badge>}
               <Box
                 color="gray.500"
                 fontWeight="semibold"
