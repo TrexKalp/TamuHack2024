@@ -27,7 +27,8 @@ import FlightCall from "./FlightCall";
 import Leaderboard from "./Leaderboard";
 import DaeModel from "./DaeModel";
 import landing from "../assets/airlines.png";
-import {globalTopic} from "./GlobalTopic.tsx";
+import { globalTopic } from "./GlobalTopic.tsx";
+import FlightLeaderboard from "./FlightLeaderboard.tsx";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
@@ -189,18 +190,15 @@ const HomePage: React.FC = () => {
                 style={{ marginRight: "20px" }}
               />
 
-              <Heading size="md" mt={5}>
+              <Heading size="md" mt={8}>
                 Leaderboard
-                <Leaderboard />
               </Heading>
+              <FlightLeaderboard />
 
-              <Heading size="md" mt={5}>
+              <Heading size="md" mt={3}>
                 Landmarks Along Your Trip
               </Heading>
               <PlacesDisplay />
-              <Button mt={4} colorScheme="blue">
-                Learn More
-              </Button>
             </Box>
 
             {/* Aircraft Trivia Section */}

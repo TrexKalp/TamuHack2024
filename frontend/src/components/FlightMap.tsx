@@ -56,7 +56,7 @@ const FlightMap = ({ encodedPolyline }) => {
       <div style={containerStyle}>
         <GoogleMap
           mapContainerStyle={{ width: "400px", height: "400px" }}
-          center={path[15]} // Set the center to the first point in the path
+          center={path[1]} // Set the center to the first point in the path
           zoom={2}
         >
           <Polyline
