@@ -2,7 +2,7 @@ import React from 'react'
 
 const InfoText = () => {
   return (
-    <div>Click on a part of the plane to learn more!</div>
+    <div>Click on any highlighted part of the plane to learn more!</div>
   )
 }
 

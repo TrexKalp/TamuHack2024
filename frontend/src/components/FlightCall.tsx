@@ -39,22 +39,9 @@ const FlightCall: React.FC = () => {
       fetch(
         `http://localhost:4000/flights?date=2024-01-27&flightNumber=${localFlightNumber}`
       )
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if (data.length > 0) {
-            setFlightData(data[0]);
-          } else {
-            console.log("No flight data found for this flight number");
-          }
-        })
+        .then((response) => response.json())
+        .then((data) => setFlightData(data[0]))
         .catch((error) => console.error("Error fetching flight data:", error));
-    } else {
-      console.log("No local flight number found");
     }
   }, [localFlightNumber]);
 
