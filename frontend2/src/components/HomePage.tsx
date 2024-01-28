@@ -20,6 +20,7 @@ import {
 import { Link } from "react-router-dom";
 import { SearchIcon, BellIcon } from "@chakra-ui/icons";
 import logo from "../assets/logolong.png";
+import FlightMap from "./FlightMap";
 
 const HomePage: React.FC = () => {
   const bgColor = useColorModeValue("gray.50", "gray.900");
@@ -36,6 +37,10 @@ const HomePage: React.FC = () => {
   ];
 
   const [text, setText] = useState("");
+
+  const encodedPolyline =
+    "slg~Haoa\\sipC`khOoha@ptdH{wJxelBotLrieCkcDvts@gaAdpTshBrya@we@lzKorCzdq@g{Cfyt@gcE~heAs~UlfbHchAl_v@ce@jv\\sq@hth@o_@trZwrAbsjAs{@rb{@o}@z{cAvgb@ls|Cvpy@zlgErfRz}~@fa_@tygBkiKbv{C?~hbE?~hbE?~hbE?~hbE?~hbE?~hbE_ibE~po]_ibE~b`|@?~b`|@~hbE~b`|@~nwHbirb@vzaj@bgtgAsnNrqzAr{|@vyfA~|q@ziy@brx@nsaAb{|BnqmCjb|AzoaCbyuFztyKzfhHzanE";
+  const mapCenter = { lat: 40.714, lng: -74.005 }; // Example: New York City
 
   useEffect(() => {
     fetch("http://localhost:3000")
@@ -57,6 +62,8 @@ const HomePage: React.FC = () => {
             />
 
             <Box bg={cardBgColor} p={4} borderRadius="lg" shadow="md">
+              <Heading size="md">Flight Map</Heading>
+              <FlightMap encodedPolyline={encodedPolyline} />
               <Heading size="md">Stops Along Your Trip</Heading>
               <Flex overflowX="scroll" mt={4}>
                 {images.map((image, index) => (

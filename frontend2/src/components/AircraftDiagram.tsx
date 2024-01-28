@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Engine from "./DiagramInfo/Engine.tsx";
 import InfoText from "./DiagramInfo/InfoText.tsx";
 import LandingGear from "./DiagramInfo/LandingGear.tsx";
@@ -17,7 +17,9 @@ const AircraftDiagram = () => {
   const bgColor = useColorModeValue("gray.100", "gray.700"); // Responsive background color for light/dark mode
   const textColor = useColorModeValue("gray.800", "gray.100"); // Responsive text color for light/dark mode
 
-  const [isElementVisible, setIsElementVisible] = useState(false);
+  const [infoText, setInfoText] = useState(
+    "Click on the highlighted areas to learn about them!"
+  );
 
   const [elementVisibility, setElementVisibility] = useState({
     infoText: true,
@@ -53,6 +55,7 @@ const AircraftDiagram = () => {
           how it was made and more.
         </Text>
         <div style={{ position: "relative" }}>
+          {/* Highlight Area 1 */}
           <div
             style={{
               position: "absolute",
@@ -65,6 +68,8 @@ const AircraftDiagram = () => {
             }}
             onClick={() => toggleVisibility("engine")}
           ></div>
+
+          {/* Highlight Area 2 */}
           <div
             style={{
               position: "absolute",
