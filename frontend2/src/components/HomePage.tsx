@@ -47,7 +47,7 @@ const HomePage: React.FC = () => {
     const fetchData = async () => {
       const username = "dJnwxZRcvhLLug8rb6KmGssOBlP4c73I6bIlgIT5";
       const password = "";
-      const url = `https://cors-anywhere.herokuapp.com/https://api.flightplandatabase.com/search/plans?fromICAO=${fromICAO}&toIACO=${toICAO}&limit=1`;
+      const url = `https://cors-anywhere.herokuapp.com/https://api.flightplandatabase.com/search/plans?fromICAO=${fromICAO}&toICAO=${toICAO}&limit=1`;
 
       const response = await fetch(url, {
         method: "GET",
