@@ -66,9 +66,9 @@ const HomePage: React.FC = () => {
             setFromIATA(data[0].origin.code);
             setToIATA(data[0].destination.code);
             globalTopic["landmarkTopic"] =
-              "City that has the airport " +
+              "Make questions about the city that the airport " +
               data[0].destination.code +
-              " . Make questions about the city, not the airport.";
+              " is located in. DO NOT MENTION THE AIRPORT CODE. ONLY ASK HISTORICAL QUESTIONS WITH ABOUT THE CITY ITSELF.";
           } else {
             console.error("Flight data not found.");
           }
