@@ -1,8 +1,7 @@
 // QuizPage.tsx
 import React, { useState } from 'react';
-import './QuizPage.css';
 import ImageLoader from "./ImageLoader.tsx"; // Importing the CSS for styling
-import { Center } from '@chakra-ui/react'
+import {Button, Center, VStack, Text} from '@chakra-ui/react'
 
 interface IAnswer {
   id: string;
@@ -74,36 +73,38 @@ const QuizPage: React.FC = () => {
   };
 
   return (
-      <div className="quiz-container">
-        <h1>{questions[currentQuestionIndex].question}</h1>
-        <div className="answers">
-          {questions[currentQuestionIndex].answers.map((answer: IAnswer) => (
-              <div
-                  key={answer.id}
-                  className={`answer ${selectedAnswer === answer.id ? 'selected' : ''} ${isAnswerSubmitted ? 'submitted' : ''}`}
-                  onClick={() => handleAnswerSelect(answer.id)}
-              >
-                {answer.text}
-              </div>
-          ))}
-        </div>
-        {!isAnswerSubmitted && selectedAnswer &&
-            <button onClick={handleSubmit}>Submit Answer</button>
-        }
-        {showExplanation && (
-            <div>
-              <div className="explanation">
-                {selectedAnswer === questions[currentQuestionIndex].correctAnswer
-                    ? <p>Correct! {questions[currentQuestionIndex].explanation}</p>
-                    : <p>Incorrect. {questions[currentQuestionIndex].explanation}</p>}
-                <Center>
-                  <ImageLoader src={questions[currentQuestionIndex].explanationMedia}/>
-                </Center>
-              </div>
-              <button onClick={handleNextQuestion}>Next Question</button>
-            </div>
-        )}
-      </div>
+      <Center>
+        <VStack spacing={4}>
+          <Text fontSize="2xl">{questions[currentQuestionIndex].question}</Text>
+          <VStack>
+            {questions[currentQuestionIndex].answers.map((answer: IAnswer) => (
+                <Button
+                    key={answer.id}
+                    onClick={() => handleAnswerSelect(answer.id)}
+                    colorScheme="blue"
+                    isDisabled={isAnswerSubmitted}
+                    variant={selectedAnswer === answer.id ? 'solid' : 'outline'}
+                >
+                  {answer.text}
+                </Button>
+            ))}
+          </VStack>
+          {!isAnswerSubmitted && selectedAnswer &&
+              <Button colorScheme="blue" onClick={handleSubmit}>Submit</Button>
+          }
+          {showExplanation && (
+              <VStack>
+                <Text>
+                  {selectedAnswer === questions[currentQuestionIndex].correctAnswer
+                      ? `Correct! ${questions[currentQuestionIndex].explanation}`
+                      : `Incorrect. ${questions[currentQuestionIndex].explanation}`}
+                </Text>
+                <ImageLoader src={questions[currentQuestionIndex].explanationMedia}/>
+                <Button colorScheme="blue" onClick={handleNextQuestion}>Next Question</Button>
+              </VStack>
+          )}
+        </VStack>
+      </Center>
   );
 };
 
